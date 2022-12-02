@@ -10,14 +10,19 @@ class Project(models.Model):
     description = models.TextField(verbose_name='Описание')
     created = models.DateField(verbose_name='Создан', auto_now_add=True)
     deadline = models.DateField(default=datetime.date.today, auto_now=False, auto_now_add=False, verbose_name='Дедлайн')
-    head = models.ForeignKey(CustomUser, on_delete=models.DO_NOTHING, verbose_name='Руководитель', blank=True, null=True)
+    head = models.ForeignKey(CustomUser, on_delete=models.DO_NOTHING, verbose_name='Руководитель', blank=True, null=True, related_name='proj_head')
+    project_team = models.ManyToManyField(CustomUser, related_name='proj_team', verbose_name='Команда')
 
     def __str__(self):
-        return self.title + ' (created ' + str(self.created) + ')'
+        return f"{self.title} (created {self.created})"
 
     class Meta:
         verbose_name = 'Проект'
         verbose_name_plural = 'Проекты'
+
+    def days_remaining():
+        delta = str(self.date_end - datetime.date.today())[:-9]
+        return delta
 
 
 def one_week_from_today():
@@ -48,16 +53,12 @@ class Task(models.Model):
     def __str__(self):
         if datetime.date.today() > self.date_end and self.status != "DN":
             delta = str(datetime.date.today() - self.date_end)[:-9]
-            return self.title + ' (late for ' + delta + ')'
+            return f"{self.title} (late for {delta})"
         else:
             return self.title
 
     def is_late(self):
-        if datetime.datetime.now() > self.date_end and self.is_done == False:
+        if datetime.datetime.now() > self.date_end and self.status != "DN":
             return True
         else:
             return False
-    
-    def is_done(self):
-        if self.status == "DN":
-            return True
