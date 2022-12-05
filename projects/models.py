@@ -45,7 +45,10 @@ class Task(models.Model):
     created = models.DateField(verbose_name='Создан', auto_now_add=True)
     date_start = models.DateField(default=datetime.date.today, auto_now=False, auto_now_add=False, verbose_name='Дата начала')
     date_end = models.DateField(default=one_week_from_today, auto_now=False, auto_now_add=False, verbose_name='Дата окончания')
- 
+    executor = models.ForeignKey(CustomUser, on_delete=models.DO_NOTHING, verbose_name='Исполнитель')
+    work_hours_plan = models.IntegerField(verbose_name='Часы (план)', default=1)
+    work_hours_fact = models.IntegerField(verbose_name='Часы (факт)', default=1)
+
     class Meta:
         verbose_name = 'Задача'
         verbose_name_plural = 'Задачи'
