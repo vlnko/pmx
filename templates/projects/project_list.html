@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Projects{% endblock title %}
+
+{% block content %}
+    <h1>All projects list</h1>
+
+    {% if projects %}
+
+        {% for project in projects %}
+            <h3>ID: {{ project.id }}</h3>
+            <ul>
+                <li><b>Project title:</b> {{ project.title}}</li>
+                <li><b>Project category:</b> {{ project.category}}</li>
+                <li><b>Project head:</b> {{ project.head}}</li>
+            </ul>
+        {% endfor %}
+
+    {% else %}
+    
+        <h3>You have no projects yet.</h3>
+    {% endif %}
+
+{% endblock content %}
+
+
