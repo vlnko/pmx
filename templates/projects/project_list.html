@@ -12,8 +12,10 @@
             <h3>ID: {{ project.id }}</h3>
             <ul>
                 <li><b>Project title:</b> {{ project.title}}</li>
-                <li><b>Project category:</b> {{ project.category}}</li>
-                <li><b>Project head:</b> {{ project.head}}</li>
+                <li><b>Category:</b> {{ project.category}}</li>
+                <li><b>Head of the project:</b> {{ project.head}}</li>
+                <li><b>Description:</b> {{ project.description}}</li>
+                <li><a href="{%url 'project-update' project.id %}">Edit</a></li>
             </ul>
         {% endfor %}
 
