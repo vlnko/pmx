@@ -1,10 +1,17 @@
 from django.urls import reverse_lazy
 from django.views.generic.edit import CreateView, UpdateView
 from django.views.generic.list import ListView
+from django.views.generic.detail import DetailView
 from django.views.generic import TemplateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import Project
 from .forms import ProjectCreateForm
+
+
+class ProjectDetailView(DetailView):
+    model = Project
+    template_name = "projects/project_detail.html"
+
 
 
 class ProjectCreateView(LoginRequiredMixin, CreateView):
@@ -16,7 +23,6 @@ class ProjectCreateView(LoginRequiredMixin, CreateView):
 class ProjectListView(LoginRequiredMixin, ListView):
     model = Project
     context_object_name = 'projects'
-    queryset = Project.objects.all().prefetch_related('task_set').all()
 
 
 class ProjectUpdateView(LoginRequiredMixin, UpdateView):

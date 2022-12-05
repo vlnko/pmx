@@ -24,7 +24,7 @@
                 <progress value="{{ project.progress }}" max="100"></progress>
                 <p class="project-date">{{ project.days_remaining }} remaining</p>
                 <a class="btn-primary" href="{%url 'project-update' project.id %}">Edit</a>
-                <a class="btn-secondary" href="{%url 'project-update' project.id %}">View tasks</a>
+                <a class="btn-secondary" href="{%url 'project-detail' project.id %}">View</a>
             </div>
             {% endfor %}
         </div>

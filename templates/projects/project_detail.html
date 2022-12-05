@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Project {{ project.title }} detail{% endblock title %}
+
+{% block content %}
+<h1>Project detail</h1>
+<h2>{{ project.title }}</h2>
+
+{% for task in project.get_tasks %}
+    {{ task.title }}<br>
+{% endfor %}
+
+
+
+{% endblock %}
+
+

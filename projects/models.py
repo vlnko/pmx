@@ -33,6 +33,10 @@ class Project(models.Model):
         else:
             p = 0
         return p
+    
+    def get_tasks(self):
+        tasks = self.task_set.all()
+        return tasks
 
 
 def one_week_from_today():
