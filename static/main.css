@@ -41,11 +41,33 @@ body {
 }
 
 
+.btn-secondary {
+    outline: 2px solid #52489C;
+    outline-offset: -2px;
+    color: #52489C;
+    padding: .4rem .8rem;
+    border-radius: 8px;
+    display: inline-block;
+    text-decoration: none;
+}
+.btn-secondary:hover {
+    background-color: #473f85;
+    outline: 2px solid #473f85;
+
+    color: white;
+}
+
+
 
 .card {
     background-color: #FBFBFB;
     padding: 2rem;
-    border-radius: 16px;
+    border-radius: 1rem;
+}
+.project-card {
+    background-color: #fff;
+    box-shadow: 0px 12px 24px -12px rgba(0, 0, 0, 0.1);
+
 }
 
 
@@ -53,22 +75,55 @@ body {
 
 
 
-
+.projects-container {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: 1fr 1fr 1fr;
+}
 
 .project-date {
     font-weight: 400;
-    font-size: 14px;
-    line-height: 19px;
+    font-size: .8rem;
     color: #A3A3A3;
     margin-top: 0;
 }
 .project-title {
     font-weight: 700;
-    font-size: 16px;
-    line-height: 22px;
+    font-size: 1.2rem;
     margin-top: 1rem;
     margin-bottom: 0;
 }
 .project-category {
     margin-top: 0;
+}
+.project-progress {
+    margin: 0; font-size: .7rem; font-weight: 700;
+}
+
+
+progress[value] {
+  --color: #84A98C; /* the progress color */
+  --background: #CAD2C5; /* the background color */
+
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  border: none;
+  width: 100%;
+  height: .5rem;
+  margin: 0;
+  border-radius: 10em;
+  background: var(--background);
+}
+progress[value]::-webkit-progress-bar {
+  border-radius: 10em;
+  background: var(--background);
+}
+progress[value]::-webkit-progress-value {
+  border-radius: 10em;
+  background: var(--color);
+}
+progress[value]::-moz-progress-bar {
+  border-radius: 10em;
+  background: var(--color);
 }

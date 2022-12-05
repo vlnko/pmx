@@ -7,24 +7,32 @@
     <h1>All projects list</h1>
 
     {% if projects %}
-
-        {% for project in projects %}
-        <div class="card" style="margin-bottom: 1rem;">
-            <span class="project-date">{{ project.created }}</span>
-            <h4 class="project-title">{{ project.title }}</h4>
-            <p class="project-category">{{ project.category}}</p>
-            <p style="margin: 0; font-size: .7rem; font-weight: 700;">Progress: {{ project.progress }} %</p>
-            <progress value="{{ project.progress }}" max="100"></progress>
-            <p class="project-date">{{ project.days_remaining }} remaining</p>
-            <a class="btn-primary" href="{%url 'project-update' project.id %}">Edit</a>
+    <!-- <div class="card"> -->
+        <!-- <h2 style="margin-top: 0;">Active projects</h2> -->
+        
+        <div class="projects-container">
+            
+            {% for project in projects %}
+            <div class="card project-card">
+                <span class="project-date">{{ project.created }}</span>
+                <h4 class="project-title">{{ project.title }}</h4>
+                <p class="project-category">{{ project.category}}</p>
+                <div style="display: flex; justify-content: space-between;">
+                    <p class="project-progress">Progress:</p>
+                    <p class="project-progress">{{ project.progress }} %</p>
+                </div>
+                <progress value="{{ project.progress }}" max="100"></progress>
+                <p class="project-date">{{ project.days_remaining }} remaining</p>
+                <a class="btn-primary" href="{%url 'project-update' project.id %}">Edit</a>
+                <a class="btn-secondary" href="{%url 'project-update' project.id %}">View tasks</a>
+            </div>
+            {% endfor %}
         </div>
-        {% endfor %}
-
-    {% else %}
-    
-        <h3>You have no projects yet.</h3>
-    {% endif %}
-
+        {% else %}
+        
+            <h3>You have no projects yet.</h3>
+        {% endif %}
+    <!-- </div> -->
 {% endblock content %}
 
 
