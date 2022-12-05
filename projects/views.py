@@ -16,6 +16,7 @@ class ProjectCreateView(LoginRequiredMixin, CreateView):
 class ProjectListView(LoginRequiredMixin, ListView):
     model = Project
     context_object_name = 'projects'
+    queryset = Project.objects.all().prefetch_related('task_set').all()
 
 
 class ProjectUpdateView(LoginRequiredMixin, UpdateView):

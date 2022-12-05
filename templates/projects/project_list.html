@@ -9,14 +9,15 @@
     {% if projects %}
 
         {% for project in projects %}
-            <h3>ID: {{ project.id }}</h3>
-            <ul>
-                <li><b>Project title:</b> {{ project.title}}</li>
-                <li><b>Category:</b> {{ project.category}}</li>
-                <li><b>Head of the project:</b> {{ project.head}}</li>
-                <li><b>Description:</b> {{ project.description}}</li>
-                <li><a href="{%url 'project-update' project.id %}">Edit</a></li>
-            </ul>
+        <div class="card" style="margin-bottom: 1rem;">
+            <span class="project-date">{{ project.created }}</span>
+            <h4 class="project-title">{{ project.title }}</h4>
+            <p class="project-category">{{ project.category}}</p>
+            <p style="margin: 0; font-size: .7rem; font-weight: 700;">Progress: {{ project.progress }} %</p>
+            <progress value="{{ project.progress }}" max="100"></progress>
+            <p class="project-date">{{ project.days_remaining }} remaining</p>
+            <a class="btn-primary" href="{%url 'project-update' project.id %}">Edit</a>
+        </div>
         {% endfor %}
 
     {% else %}

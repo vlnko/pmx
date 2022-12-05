@@ -7,6 +7,7 @@ body {
     padding: 1rem 4rem;
     margin: 0;
     font-family: 'Nunito', sans-serif;
+    background-color: #EBEBEB;
 }
 
 
@@ -22,4 +23,52 @@ body {
 }
 .nav li:not(:last-child) {
     margin-right: 1rem;
-  }
+}
+
+
+
+
+.btn-primary {
+    background-color: #52489C;
+    padding: .4rem .8rem;
+    border-radius: 8px;
+    display: inline-block;
+    text-decoration: none;
+    color: white;
+}
+.btn-primary:hover {
+    background-color: #473f85;
+}
+
+
+
+.card {
+    background-color: #FBFBFB;
+    padding: 2rem;
+    border-radius: 16px;
+}
+
+
+
+
+
+
+
+
+.project-date {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 19px;
+    color: #A3A3A3;
+    margin-top: 0;
+}
+.project-title {
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 22px;
+    margin-top: 1rem;
+    margin-bottom: 0;
+}
+.project-category {
+    margin-top: 0;
+}

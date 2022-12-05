@@ -20,9 +20,19 @@ class Project(models.Model):
         verbose_name = 'Проект'
         verbose_name_plural = 'Проекты'
 
-    def days_remaining():
-        delta = str(self.date_end - datetime.date.today())[:-9]
-        return delta
+    def days_remaining(self):
+        d = str(self.deadline - datetime.date.today())[:-9]
+        return d
+
+    def progress(self):
+        tasks_all = len(self.task_set.all())
+        tasks_done = len(self.task_set.all().filter(status="DN"))
+        if tasks_all > 0:
+            percent = tasks_done / tasks_all * 100
+            p = int(percent)
+        else:
+            p = 0
+        return p
 
 
 def one_week_from_today():
