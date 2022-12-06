@@ -25,10 +25,10 @@ class Project(models.Model):
         return d
 
     def progress(self):
-        tasks_all = len(self.task_set.all())
-        tasks_done = len(self.task_set.all().filter(status="DN"))
+        count_tasks_all = len(self.task_set.all())
+        count_tasks_done = len(self.task_set.all().filter(status="DN"))
         if tasks_all > 0:
-            percent = tasks_done / tasks_all * 100
+            percent = count_tasks_done / count_tasks_all * 100
             p = int(percent)
         else:
             p = 0
