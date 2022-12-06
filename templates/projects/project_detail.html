@@ -5,11 +5,44 @@
 
 {% block content %}
 <h1>Project detail</h1>
-<h2>{{ project.title }}</h2>
 
-{% for task in project.get_tasks %}
-    {{ task.title }}<br>
-{% endfor %}
+<div class="card">
+    <h2>{{ project.title }}</h2>
+    <h3>{{ project.category }}</h3>
+    <p class="project-date">Created on: {{ project.created }}</p>
+    <p>Deadline: {{ project.deadline }}</p>
+    <p>Description: {{ project.description }}</p>
+    <p>Head: {{ project.head }}</p>
+    <p>Team: 
+        {% for mate in project.project_team.all %}
+            <ul>
+                <li>{{ mate.first_name }} {{ mate.last_name }} (@{{ mate.username }})</li>
+            </ul>
+            
+        {% endfor %}
+    </p>
+
+
+</div>
+
+{% if project.get_tasks %}
+
+    <div class="card" style="margin-top: 1rem;">
+        <h4>Tasks on this project</h4>
+        {% for task in project.get_tasks %}
+            <div class="task">
+                <h4>{{ task.title }}</h4>
+                <p>{{ task.description }}</p>
+                <p class="project-date">{{ task.date_end }}</p>
+                <p class="status-{{ task.status }}"><b>Status: {{ task.status }}</b></p>
+            </div>
+        {% endfor %}
+    </div>
+{% else %}  
+    <div class="card" style="margin-top: 1rem;">  
+        <h4>You have no tasks on this project yet.</h4>
+    </div>
+{% endif %}
 
 
 
