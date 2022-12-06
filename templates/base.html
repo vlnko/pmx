@@ -15,11 +15,9 @@
 
 <body>
     <ul class="nav">
-        <li><b>MyDj</b></li>
-        <li><a href="{% url 'home' %}">Home</a></li>
-        <li><a href="{% url 'about' %}">About</a></li>
-        <li><a href="{% url 'project-create' %}">Create project</a></li>
-        <li><a href="{% url 'project-all' %}">View projects</a></li>
+        <li><b>ProjectManagerX</b></li>
+        <li><a href="{% url 'home' %}">Главная</a></li>
+        <li><a href="{% url 'project-all' %}">Проекты</a></li>
     </ul>
 
     {% if messages %}
@@ -36,7 +34,10 @@
         {% block content %}{% endblock content %}
     </div>
 
-
+    <script>
+        {% block script%}
+        {% endblock%}
+    </script>
 </body>
 
 </html>

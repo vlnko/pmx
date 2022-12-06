@@ -27,8 +27,11 @@ class ProjectListView(LoginRequiredMixin, ListView):
 class ProjectUpdateView(LoginRequiredMixin, UpdateView):
     model = Project
     fields = ['title', 'category', 'description', 'deadline', 'head', 'project_team']
-    success_url = reverse_lazy("project-all")
     template_name = "projects/project_update.html"
+
+    def get_success_url(self):
+       pk = self.kwargs["pk"]
+       return reverse_lazy("project-detail", kwargs={"pk": pk})
 
     def form_valid(self, form):
         return super(ProjectUpdateView,self).form_valid(form)

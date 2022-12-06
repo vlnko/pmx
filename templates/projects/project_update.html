@@ -1,10 +1,10 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block title %}Update project{% endblock title %}
+{% block title %}Изменить проект{% endblock title %}
 
 {% block content %}
-<h1>Update project</h1>
+<h1>Изменить проект: {{ project.title }}</h1>
 
 
 <form method="post">
@@ -15,7 +15,7 @@
             {{ field }}
         </p>
 	{% endfor %}
-    <button type="submit">Save project</button>
+    <button type="submit">Сохранить проект</button>
   </form>
 
 
