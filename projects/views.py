@@ -8,10 +8,9 @@ from .models import Project
 from .forms import ProjectCreateForm
 
 
-class ProjectDetailView(DetailView):
+class ProjectDetailView(LoginRequiredMixin, DetailView):
     model = Project
     template_name = "projects/project_detail.html"
-
 
 
 class ProjectCreateView(LoginRequiredMixin, CreateView):
