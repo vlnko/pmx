@@ -83,6 +83,13 @@ body {
     border-radius: 1rem;
     background-color: rgb(222, 222, 222);
 }
+.task h3 a {
+    text-decoration: none;
+    color: black;
+}
+.task h3 a:hover {
+    color: #52489C;
+}
 .task:last-child {
     margin-bottom: 0;
 }
