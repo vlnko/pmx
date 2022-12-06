@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Удалить проект{% endblock title %}
+
+{% block content %}
+<h1>Вы уверены, что хотите удалить проект "{{ project.title }}"?</h1>
+
+<form method="post">{% csrf_token %}
+    <input type="submit" value="Да, удалить" class="btn-primary">
+</form>
+
+{% endblock %}
+
+

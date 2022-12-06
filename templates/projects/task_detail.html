@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Детали задачи: {{ task.title }}{% endblock title %}
+
+{% block content %}
+<h1>Детали задачи {{ task.title }}</h1>
+<a href="{%url 'task-update' task.id %}" class="btn-primary">Изменить</a>
+<a href="{% url 'project-detail' task.project.id %}" class="btn-secondary">Перейти к проекту</a>
+
+
+
+{% endblock %}
+
+

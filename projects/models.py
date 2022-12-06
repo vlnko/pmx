@@ -49,7 +49,7 @@ class Project(models.Model):
         return p
     
     def get_tasks(self):
-        tasks = self.task_set.all()
+        tasks = self.task_set.all().order_by('date_end')
         return tasks
 
 
@@ -59,11 +59,11 @@ def one_week_from_today():
 
 class Task(models.Model):
     class Status(models.TextChoices):
-        IN = "IN", "INBOX"
-        WO = "WO", "WORKING"
-        CK = "CK", "CHECKING"
-        RW = "RW", "REWORKING"
-        DN = "DN", "DONE"
+        IN = "IN", "Входящие"
+        WO = "WO", "В работе"
+        CK = "CK", "На проверке"
+        RW = "RW", "Исправляется"
+        DN = "DN", "Готово"
     
     id = models.AutoField(verbose_name='ID задачи', primary_key=True)
     project = models.ForeignKey(Project, on_delete=models.CASCADE, verbose_name='Проект')
