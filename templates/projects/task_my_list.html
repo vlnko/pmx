@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Проекты{% endblock title %}
+
+{% block content %}
+    <h1>Мои задачи <a href="{% url 'task-create' %}" style="text-decoration: none;">+</a></h1>
+
+    {% if tasks %}
+        {% for task in tasks %}
+            <h3>{{ task.title }}</h3>
+        {% endfor %}
+    {% else %}
+        <h3>No tasks for you.</h3>
+    {% endif %}
+
+    
+
+{% endblock content %}
+
+
+

@@ -18,6 +18,7 @@
                 <div class="top">
                     <div class="space-between">
                         <span class="project-date">{{ project.created }}</span>
+                        <span class="project-tasks-num">{{ project.get_tasks|length }}</span>
                     </div>
                     <h4 class="project-title">
                         <a href="{%url 'project-detail' project.id %}">

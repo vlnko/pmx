@@ -2,16 +2,21 @@
 @import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;0,1000;1,200;1,300;1,400;1,500;1,700;1,900;1,1000&display=swap');
 
 
-/* Body styles */
+/* General styles */
 body {
     padding: 1rem 4rem;
     margin: 0;
     font-family: 'Nunito', sans-serif;
     background-color: #EBEBEB;
 }
+.card {
+    background-color: #FBFBFB;
+    padding: 2rem;
+    border-radius: 1rem;
+}
 
 
-/* Navigation list styles */
+/* Navigation */
 .nav {
     display: flex;
     margin: 0;
@@ -26,8 +31,7 @@ body {
 }
 
 
-
-
+/* Buttons */
 .btn-primary {
     background-color: #52489C;
     padding: .4rem .8rem;
@@ -39,8 +43,6 @@ body {
 .btn-primary:hover {
     background-color: #473f85;
 }
-
-
 .btn-secondary {
     outline: 2px solid #52489C;
     outline-offset: -2px;
@@ -53,17 +55,15 @@ body {
 .btn-secondary:hover {
     background-color: #473f85;
     outline: 2px solid #473f85;
-
     color: white;
 }
-
-
-
-.card {
-    background-color: #FBFBFB;
-    padding: 2rem;
-    border-radius: 1rem;
+.btn-secondary.btn-small {
+    font-size: .8rem;
+    padding: .25rem .5rem;
 }
+
+
+/* Project */
 .project-card {
     background-color: #fff;
     box-shadow: 0px 12px 24px -12px rgba(0, 0, 0, 0.1);
@@ -77,48 +77,11 @@ body {
     padding-top: 1rem;
     border-top: solid 1px #EBEBEB;
 }
-.task {
-    margin-bottom: 1rem;
-    padding: 1.5rem;
-    border-radius: 1rem;
-    background-color: rgb(222, 222, 222);
-}
-.task h3 a {
-    text-decoration: none;
-    color: black;
-}
-.task h3 a:hover {
-    color: #52489C;
-}
-.task:last-child {
-    margin-bottom: 0;
-}
-.status-DN {
-    color: white;
-    background-color: #84A98C;
-    padding: .2rem .4rem;
-    font-size: .7rem;
-    border-radius: .4rem;
-}
-.status-IN, .status-WO, .status-CK, .status-RW {
-    color: grey;
-    background-color: #d2d2d2;
-    padding: .2rem .4rem;
-    font-size: .7rem;
-    border-radius: .4rem;
-}
-
-
-
-
-
-
 .projects-container {
     display: grid;
     gap: 1rem;
     grid-template-columns: 1fr 1fr 1fr;
 }
-
 .project-date {
     font-weight: 400;
     font-size: .8rem;
@@ -150,12 +113,17 @@ body {
 .project-description h1, .project-description h2, .project-description h3, .project-description h4, .project-description h5 {
     margin: 0;
 }
-
+.project-detail-left {
+    width: 60%;
+    height: 100%;
+}
+.project-detail-right {
+    width: 40%;
+    height: 100%;
+}
 .project-progress {
     margin: 0 0 -0.5rem 0; font-size: .7rem; font-weight: 700;
 }
-
-
 progress[value] {
   --color: #84A98C; /* the progress color */
   --background: #CAD2C5; /* the background color */
@@ -182,11 +150,53 @@ progress[value]::-moz-progress-bar {
   border-radius: 10em;
   background: var(--color);
 }
+.project-tasks-num {
+    display: inline-block;
+    padding: 0.25rem .5rem;
+    background-color: #fafafa;
+    color: grey;
+    font-weight: 700;
+    font-size: .7rem;
+    border-radius: .25rem;
+}
 
 
+/* Task */
+.task {
+    margin-bottom: 1rem;
+    padding: 1.5rem;
+    border-radius: 1rem;
+    background-color: rgb(222, 222, 222);
+}
+.task h3 a {
+    text-decoration: none;
+    color: black;
+}
+.task h3 a:hover {
+    color: #52489C;
+}
+.task:last-child {
+    margin-bottom: 0;
+}
+.status-DN {
+    color: white;
+    background-color: #84A98C;
+    padding: .2rem .4rem;
+    font-size: .7rem;
+    border-radius: .4rem;
+    display: inline-block;
+}
+.status-IN, .status-WO, .status-CK, .status-RW {
+    color: grey;
+    background-color: #d2d2d2;
+    padding: .2rem .4rem;
+    font-size: .7rem;
+    border-radius: .4rem;
+    display: inline-block;
+}
 
 
-/* Tags styles */
+/* Tags */
 .tag-category {
     background-color: #dfdcf5;
     color: #52489C;
@@ -206,19 +216,14 @@ progress[value]::-moz-progress-bar {
 }
 
 
-
 /* Help styles */
-.space-between {display: flex; justify-content: space-between; align-items: center;}
+.space-between {
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center;
+}
 .flex-r {
     display: flex;
     gap: 1rem;
     width: 100%;
-}
-.project-detail-left {
-    width: 60%;
-    height: 100%;
-}
-.project-detail-right {
-    width: 40%;
-    height: 100%;
 }

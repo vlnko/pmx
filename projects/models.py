@@ -51,7 +51,7 @@ class Project(models.Model):
     def get_tasks(self):
         tasks = self.task_set.all().order_by('date_end')
         return tasks
-
+    
 
 def one_week_from_today():
     return datetime.datetime.now() + datetime.timedelta(days=7)
@@ -93,3 +93,7 @@ class Task(models.Model):
             return True
         else:
             return False
+    
+    # def user_tasks(self):
+    #     tasks = self.objects.all().filter(executor=request.user)
+    #     return tasks

@@ -7,6 +7,8 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import Project, Task
 from .forms import ProjectCreateForm, TaskCreateForm
 from django.http import HttpResponseRedirect
+from django.contrib.auth.decorators import login_required
+from django.shortcuts import render
 
 
 class ProjectDetailView(LoginRequiredMixin, DetailView):
@@ -83,3 +85,9 @@ class TaskDeleteView(LoginRequiredMixin, DeleteView):
     def get_success_url(self):
        pk = self.object.project.id
        return reverse_lazy("project-detail", kwargs={"pk": pk})
+
+
+@login_required(login_url='login')
+def MyTasksView(request):
+    tasks = Task.objects.all().filter(executor=request.user)
+    return render(request, 'projects/task_my_list.html', {'title': 'My tasks', 'tasks': tasks})
