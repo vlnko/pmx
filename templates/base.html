@@ -16,9 +16,12 @@
 <body>
     <ul class="nav">
         <li><b>ProjectManagerX</b></li>
-        <li><a href="{% url 'home' %}">Главная</a></li>
-        <li><a href="{% url 'project-all' %}">Проекты</a></li>
+        <li><a href="{% url 'project-home' %}">Главная</a></li>
         <li><a href="{% url 'task-my' %}">Мои задачи</a></li>
+        <li><a href="{% url 'project-all' %}">Все проекты</a></li>
+        {% if user.is_authenticated %}
+            <li><a href="{% url 'logout' %}">Выйти</a></li>
+        {% endif %}
     </ul>
 
     {% if messages %}
@@ -33,6 +36,7 @@
 
     <div class="container">
         {% block content %}{% endblock content %}
+        
     </div>
 
     <script>

@@ -1,0 +1,84 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Home page{% endblock title %}
+
+{% block content %}
+
+    <h1>{{ user.first_name }} {{ user.last_name }} (@{{ user.username }})</h1>
+    <p>Привет, {{ user.first_name }}!</p>
+    <p>Задач, где ты исполнитель: {{ tasks|length }}. Проектов, где ты участник {{ projects|length }}.</p>
+    <a href="{% url 'task-create' %}" class="btn-primary">Новая задача</a>
+    <a href="{% url 'project-create' %}" class="btn-primary">Новый проект</a>
+    <div class="home-cols">
+        <div>
+            <h2>Мои задачи</h2>
+            {% if tasks %}
+                {% for task in tasks %}
+                    <div class="card project-card">
+                        <div class="space-between">
+                            <div>
+                                <h3 style="margin: 0;" class="project-title">
+                                    <a href="{%url 'task-detail' task.id %}">
+                                        {{ task.title }}
+                                    </a></h3>
+                                <p class="project-date">Срок: {{ task.date_end }}</p>
+                            </div>
+                            <p class="status-{{ task.status }}">{{ task.get_status_display }}</p>
+                        </div>                            
+                        <a href="{%url 'task-update' task.id %}" class="btn-primary" style="margin-top: 1rem;">Изменить</a>
+                        <a href="{%url 'task-delete' task.id %}" class="btn-secondary">Удалить</a>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <h3>У тебя пока нет задач.</h3>
+            {% endif %}
+        </div>
+    
+        <div>
+            <h2>Мои проекты</h2>
+            {% if projects %}
+                {% for project in projects %}
+                <div class="card project-card" style="margin-bottom: 1rem;">
+
+                    <div class="top">
+                        <div class="space-between">
+                            <span class="project-date">{{ project.deadline }}</span>
+                            <span class="project-tasks-num">{{ project.get_tasks|length }}</span>
+                        </div>
+                        <h4 class="project-title">
+                            <a href="{%url 'project-detail' project.id %}">
+                            {{ project.title }}
+                            </a>
+                        </h4>
+                        <p class="project-category">{{ project.category}}</p>
+                        <div class="space-between">
+                            <p class="project-progress">Прогресс:</p>
+                            <p class="project-progress">{{ project.progress }} %</p>
+                        </div>
+                        <progress value="{{ project.progress }}" max="100"></progress>
+                    </div>
+
+                    <div class="bottom">
+                        <div class="space-between">
+                            <div>
+                                <a class="btn-primary" href="{%url 'project-update' project.id %}">Изменить</a>
+                                <a class="btn-secondary" href="{%url 'project-delete' project.id %}">Удалить</a>       
+                            </div>
+                            <p class="project-date">{{ project.days_remaining }} остается</p>
+                        </div>
+                    </div>
+
+                </div>
+                {% endfor %}
+            {% else %}
+                <h3>Ты пока не участвуешь ни в одном проекте.</h3>
+            {% endif %}
+        </div>
+    
+    </div>
+    
+    
+
+
+{% endblock content %}

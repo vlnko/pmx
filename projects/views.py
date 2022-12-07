@@ -91,3 +91,10 @@ class TaskDeleteView(LoginRequiredMixin, DeleteView):
 def MyTasksView(request):
     tasks = Task.objects.all().filter(executor=request.user)
     return render(request, 'projects/task_my_list.html', {'title': 'My tasks', 'tasks': tasks})
+
+
+@login_required(login_url='login')
+def ProjectHomeView(request):
+    my_tasks = Task.objects.all().filter(executor=request.user)
+    my_projects = Project.objects.all().filter(project_team=request.user).order_by('deadline')
+    return render(request, 'projects/home.html', {'title': 'My homepage', 'tasks': my_tasks, 'projects': my_projects})
