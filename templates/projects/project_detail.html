@@ -40,7 +40,7 @@
                                 <div>
                                     <h3 style="margin: 0;">
                                         <a href="{%url 'task-detail' task.id %}">
-                                            {{ task.title }}
+                                            {{ task.title }} (@{{ task.executor.username }})
                                         </a></h3>
                                     <p class="project-date">Срок: {{ task.date_end }}</p>
                                 </div>
