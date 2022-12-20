@@ -14,49 +14,15 @@
 </head>
 
 <body>
-    <ul class="nav">
-        <li><img src="{% static 'ew-ava.png' %}" style="width: 72px;"></li>
-        <li><a href="{% url 'project-home' %}">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="var(--col-prim)" class="bi bi-house"
-                    viewBox="0 0 16 16">
-                    <path
-                        d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L2 8.207V13.5A1.5 1.5 0 0 0 3.5 15h9a1.5 1.5 0 0 0 1.5-1.5V8.207l.646.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.707 1.5ZM13 7.207V13.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5V7.207l5-5 5 5Z" />
-                </svg>
-            </a></li>
-        <li><a href="{% url 'task-my' %}">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="var(--col-prim)" class="bi bi-list-task"
-                    viewBox="0 0 16 16">
-                    <path fill-rule="evenodd"
-                        d="M2 2.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5V3a.5.5 0 0 0-.5-.5H2zM3 3H2v1h1V3z" />
-                    <path
-                        d="M5 3.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zM5.5 7a.5.5 0 0 0 0 1h9a.5.5 0 0 0 0-1h-9zm0 4a.5.5 0 0 0 0 1h9a.5.5 0 0 0 0-1h-9z" />
-                    <path fill-rule="evenodd"
-                        d="M1.5 7a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5H2a.5.5 0 0 1-.5-.5V7zM2 7h1v1H2V7zm0 3.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5H2zm1 .5H2v1h1v-1z" />
-                </svg>
-            </a></li>
-        <li><a href="{% url 'project-all' %}">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="var(--col-prim)"
-                    class="bi bi-clipboard-data" viewBox="0 0 16 16">
-                    <path
-                        d="M4 11a1 1 0 1 1 2 0v1a1 1 0 1 1-2 0v-1zm6-4a1 1 0 1 1 2 0v5a1 1 0 1 1-2 0V7zM7 9a1 1 0 0 1 2 0v3a1 1 0 1 1-2 0V9z" />
-                    <path
-                        d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z" />
-                    <path
-                        d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z" />
-                </svg>
-            </a></li>
-        {% if user.is_authenticated %}
-        <li><a href="{% url 'logout' %}">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="var(--col-prim)"
-                    class="bi bi-box-arrow-right" viewBox="0 0 16 16">
-                    <path fill-rule="evenodd"
-                        d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0v2z" />
-                    <path fill-rule="evenodd"
-                        d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3z" />
-                </svg>
-            </a></li>
-        {% endif %}
-    </ul>
+    <div class="nav">
+        <div>
+            <img src="{% static 'ew-ava.png' %}" style="width: 66px;">
+            <a href="{% url 'project-home' %}"><img src="{% static 'ic24-home.png' %}" alt=""></a>
+            <a href="{% url 'task-my' %}"><img src="{% static 'ic24-success.png' %}" alt=""></a>
+            <a href="{% url 'project-all' %}"><img src="{% static 'ic24-suitcase.png' %}" alt=""></a>
+        </div>
+        <a href="{% url 'logout' %}"><img src="{% static 'ic24-turn-off.png' %}" alt=""></a>
+    </div>
 
 
 

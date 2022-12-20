@@ -6,8 +6,8 @@
 {% block content %}
     <h1>Детали задачи {{ task.title }}</h1>
     
-    <a href="{% url 'project-detail' task.project.id %}" class="btn-secondary btn-small" style="margin-bottom: 1rem;">К проекту</a>
-    <a href="{% url 'task-my' %}" class="btn-secondary btn-small" style="margin-bottom: 1rem;">К моим задачам</a>
+    <a href="{% url 'project-detail' task.project.id %}" class="btn-secondary" style="margin-bottom: 1rem;">К проекту</a>
+    <a href="{% url 'task-my' %}" class="btn-secondary" style="margin-bottom: 1rem;">К моим задачам</a>
     <div class="card">
         <div class="space-between">
             <div>

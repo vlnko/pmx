@@ -25,6 +25,7 @@ class ProjectCreateView(LoginRequiredMixin, CreateView):
 class ProjectListView(LoginRequiredMixin, ListView):
     model = Project
     context_object_name = 'projects'
+    ordering = 'deadline'
 
 
 class ProjectUpdateView(LoginRequiredMixin, UpdateView):

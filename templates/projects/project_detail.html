@@ -4,35 +4,34 @@
 {% block title %}Детали проекта: {{ project.title }}{% endblock title %}
 
 {% block content %}
-<h1>Проект {{ project.title }} <a href="{% url 'task-create' %}" style="text-decoration: none;">+</a></h1>
-
-<div>
-
-    <div class="flex-r">
-
-        <div class="project-detail-left card">
-            <div class="space-between">
-                <span class="tag-category">{{ project.category }}</span>
-                <p class="project-date">Created on: {{ project.created }}</p>
-            </div>
-            <p><b>Срок</b>: {{ project.deadline }} <span class="tag-grey">осталось {{ project.days_remaining }}</span></p>
-            <p><b>Руководитель</b>: {{ project.head }}</p>
-            <p><b>Команда проекта</b>: 
-                {% for mate in project.project_team.all %}
-                    <ul>
+    <h1>Проект {{ project.title }} <a href="{% url 'task-create' %}" style="text-decoration: none;">+</a></h1>
+    <div>
+        <div class="flex-r">
+            <div class="project-detail-left card">
+                <div class="space-between">
+                    <span class="tag-category">{{ project.category }}</span>
+                    <p class="project-date">Created on: {{ project.created }}</p>
+                </div>
+                <p>
+                    <b>Срок</b>: {{ project.deadline }} 
+                    <span class="tag-grey">осталось {{ project.days_remaining }}</span>
+                </p>
+                <p><b>Руководитель</b>: {{ project.head }}</p>
+                <b>Команда проекта</b>:
+                <ul>
+                    {% for mate in project.project_team.all %}
                         <li>{{ mate.first_name }} {{ mate.last_name }} (@{{ mate.username }})</li>
-                    </ul>
-                    
-                {% endfor %}
-            </p>
-            <p><b>Описание проекта</b>:</p>
-            <div class="project-description">{{ project.description|safe|linebreaks }}</div>
-            <a class="btn-primary" href="{%url 'project-update' project.id %}" style="margin-top: 1rem;">Редактировать проект</a>
-            <a href="{% url 'task-create' %}" class="btn-secondary">Добавить задачу</a>
-        </div>
+                    {% endfor %}
+                </ul>
+                <p><b>Описание проекта</b>:</p>
+                <div class="project-description">{{ project.description|safe|linebreaks }}</div>
+                <a class="btn-primary" href="{%url 'project-update' project.id %}" style="margin-top: 1rem;">Редактировать
+                    проект</a>
+                <a href="{% url 'task-create' %}" class="btn-secondary">Добавить задачу</a>
+            </div>
 
-        <div class="project-detail-right">
-            {% if project.get_tasks %}
+            <div class="project-detail-right">
+                {% if project.get_tasks %}
                     <h3 style="margin-top: 0;">Задачи в этом проекте</h3>
                     {% for task in project.get_tasks %}
                         <div class="task">
@@ -41,36 +40,22 @@
                                     <h3 style="margin: 0;">
                                         <a href="{%url 'task-detail' task.id %}">
                                             {{ task.title }} (@{{ task.executor.username }})
-                                        </a></h3>
+                                        </a>
+                                    </h3>
                                     <p class="project-date">Срок: {{ task.date_end }}</p>
                                 </div>
                                 <p class="status-{{ task.status }}">{{ task.get_status_display }}</p>
-                            </div>                            
+                            </div>
                             <a href="{%url 'task-update' task.id %}" class="btn-primary" style="margin-top: 1rem;">Изменить</a>
                             <a href="{%url 'task-delete' task.id %}" class="btn-secondary">Удалить</a>
                         </div>
                     {% endfor %}
-            {% else %}  
-                <div class="card">  
-                    <h3 style="color: gainsboro;">В этом проекте пока нет задач.</h3>
-                </div>
-            {% endif %}
-            
+                {% else %}
+                    <div class="card">
+                        <h3 style="color: gainsboro;">В этом проекте пока нет задач.</h3>
+                    </div>
+                {% endif %}
+            </div>
         </div>
-
     </div>
-    
-
-
-
-
-    
-
-
-</div>
-
-
-
 {% endblock %}
-
-
