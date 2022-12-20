@@ -22,12 +22,14 @@
                                     <a href="{%url 'task-detail' task.id %}">
                                         {{ task.title }}
                                     </a></h3>
-                                <p class="project-date">Срок: {{ task.date_end }}</p>
+                                <p class="project-date"><b>{{ task.project }}/</b> до {{ task.date_end }}</p>
                             </div>
-                            <p class="status-{{ task.status }}">{{ task.get_status_display }}</p>
-                        </div>                            
-                        <a href="{%url 'task-update' task.id %}" class="btn-primary" style="margin-top: 1rem;">Изменить</a>
-                        <a href="{%url 'task-delete' task.id %}" class="btn-secondary">Удалить</a>
+                            <div style="display: flex; align-items: center;">
+                                <p class="status-{{ task.status }}">{{ task.get_status_display }}</p>
+                                <a href="{%url 'task-update' task.id %}" style="height: 20px; margin-left: .4rem;"><img src="{% static 'ic20-edit.svg' %}"></a>
+                                <a href="{%url 'task-delete' task.id %}" style="height: 20px; margin-left: .4rem;"><img src="{% static 'ic20-delete.svg' %}"></a>
+                            </div>
+                        </div>
                     </div>
                 {% endfor %}
             {% else %}
@@ -40,7 +42,6 @@
             {% if projects %}
                 {% for project in projects %}
                 <div class="card project-card" style="margin-bottom: 1rem;">
-
                     <div class="top">
                         <div class="space-between">
                             <span class="project-date">{{ project.deadline }}</span>
@@ -58,17 +59,16 @@
                         </div>
                         <progress value="{{ project.progress }}" max="100"></progress>
                     </div>
-
                     <div class="bottom">
-                        <div class="space-between">
+                        <div class="space-between" style="align-items: center;">
+                            <p class="project-date">{{ project.days_remaining }}</p>
                             <div>
-                                <a class="btn-primary" href="{%url 'project-update' project.id %}">Изменить</a>
-                                <a class="btn-secondary" href="{%url 'project-delete' project.id %}">Удалить</a>       
+                                <a href="{%url 'project-update' project.id %}" style="margin: 2rem .4rem; 0 0"><img style="height: 20px;" src="{% static 'ic20-edit.svg' %}"></a>
+                                <a ref="{%url 'project-delete' project.id %}" style="height: 20px;"><img style="height: 20px;" src="{% static 'ic20-delete.svg' %}"></a>       
                             </div>
-                            <p class="project-date">{{ project.days_remaining }} остается</p>
+                            
                         </div>
                     </div>
-
                 </div>
                 {% endfor %}
             {% else %}

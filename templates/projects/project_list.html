@@ -13,8 +13,7 @@
         <div class="projects-container">
             
             {% for project in projects %}
-            <div class="card project-card">
-
+            <div class="card project-card" style="margin-bottom: 1rem;">
                 <div class="top">
                     <div class="space-between">
                         <span class="project-date">{{ project.deadline }}</span>
@@ -32,17 +31,16 @@
                     </div>
                     <progress value="{{ project.progress }}" max="100"></progress>
                 </div>
-
                 <div class="bottom">
-                    <div class="space-between">
-                        <div>
-                            <a class="btn-primary" href="{%url 'project-update' project.id %}">Изменить</a>
-                            <a class="btn-secondary" href="{%url 'project-delete' project.id %}">Удалить</a>       
-                        </div>
+                    <div class="space-between" style="align-items: center;">
                         <p class="project-date">{{ project.days_remaining }} остается</p>
+                        <div>
+                            <a href="{%url 'project-update' project.id %}" style="margin: 2rem .4rem; 0 0"><img style="height: 20px;" src="{% static 'ic20-edit.svg' %}"></a>
+                            <a ref="{%url 'project-delete' project.id %}" style="height: 20px;"><img style="height: 20px;" src="{% static 'ic20-delete.svg' %}"></a>       
+                        </div>
+                        
                     </div>
                 </div>
-
             </div>
             {% endfor %}
         </div>
