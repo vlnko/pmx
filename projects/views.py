@@ -79,7 +79,6 @@ class TaskUpdateView(LoginRequiredMixin, UpdateView):
 
 class TaskDeleteView(LoginRequiredMixin, DeleteView):
     model = Task
-    # success_url = reverse_lazy('project-all')
     template_name = "projects/task_delete.html"
 
     def get_success_url(self):
@@ -89,12 +88,12 @@ class TaskDeleteView(LoginRequiredMixin, DeleteView):
 
 @login_required(login_url='login')
 def MyTasksView(request):
-    tasks = Task.objects.all().filter(executor=request.user)
+    tasks = Task.objects.all().filter(executor=request.user).order_by('-status', 'date_end')
     return render(request, 'projects/task_my_list.html', {'title': 'My tasks', 'tasks': tasks})
 
 
 @login_required(login_url='login')
 def ProjectHomeView(request):
-    my_tasks = Task.objects.all().filter(executor=request.user)
+    my_tasks = Task.objects.all().filter(executor=request.user).order_by('-status', 'date_end')
     my_projects = Project.objects.all().filter(project_team=request.user).order_by('deadline')
     return render(request, 'projects/home.html', {'title': 'My homepage', 'tasks': my_tasks, 'projects': my_projects})

@@ -277,3 +277,30 @@ progress[value]::-moz-progress-bar {
     gap: 1rem;
     width: 100%;
 }
+
+
+/* Inputs */
+input, select, textarea {
+    font-size: 1rem;
+    font-family: 'Overpass';
+    width: 100%;
+    border: 1px solid rgb(202, 202, 202);
+    padding: .55rem .9rem .4rem;
+    box-sizing: border-box;
+     -webkit-box-sizing:border-box;
+     -moz-box-sizing: border-box;
+     -webkit-appearance: none;
+    -moz-appearance : none;
+    background-color: #fff;
+    border-radius: .5rem;
+}
+[type="submit"] {
+    background: linear-gradient(206.57deg, #FF7020 16.67%, #FF7455 100%);
+    padding: .55rem .9rem .4rem;
+    border-radius: 5rem;
+    display: inline-block;
+    text-decoration: none;
+    color: white;
+    width: fit-content;
+    border: none;
+}

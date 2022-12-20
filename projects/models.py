@@ -5,8 +5,8 @@ from accounts.models import CustomUser
 
 class Project(models.Model):
     id = models.AutoField(verbose_name='ID проекта', primary_key=True)
-    title = models.CharField(verbose_name='Наименование проекта', max_length=50, blank=False)
-    category = models.CharField(verbose_name='Категория', max_length=50)
+    title = models.CharField(verbose_name='Наименование проекта', max_length=24, blank=False)
+    category = models.CharField(verbose_name='Категория', max_length=48)
     description = models.TextField(verbose_name='Описание')
     created = models.DateField(verbose_name='Создан', auto_now_add=True)
     deadline = models.DateField(default=datetime.date.today, auto_now=False, auto_now_add=False, verbose_name='Дедлайн')
@@ -14,7 +14,7 @@ class Project(models.Model):
     project_team = models.ManyToManyField(CustomUser, related_name='proj_team', verbose_name='Команда')
 
     def __str__(self):
-        return f"{self.title}"
+        return self.title
 
     class Meta:
         verbose_name = 'Проект'
@@ -23,14 +23,11 @@ class Project(models.Model):
     def days_remaining(self):
         d = str(self.deadline - datetime.date.today())[:-9]
         numbers = re.search(r'\d+', d)
-
         if numbers != None:
             numbers = numbers.group()
         else:
             numbers = 0
-        
         num_days = int(numbers)
-
         words = ['день', 'дня', 'дней']
         if num_days % 10 == 1 and num_days % 100 != 11:
             p = 0
