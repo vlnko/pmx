@@ -51,6 +51,10 @@ class TaskCreateView(LoginRequiredMixin, CreateView):
     form_class = TaskCreateForm
     template_name = "projects/task_create.html"
 
+    def get(self, request, pr_id):
+        form = self.form_class(initial={'project':pr_id})
+        return render(request, self.template_name, {'form': form})
+
     def post(self, request, *args, **kwargs):
         form = self.form_class(request.POST)
         if form.is_valid():
@@ -89,7 +93,7 @@ class TaskDeleteView(LoginRequiredMixin, DeleteView):
 
 @login_required(login_url='login')
 def MyTasksView(request):
-    tasks = Task.objects.all().filter(executor=request.user).order_by('-status', 'date_end')
+    tasks = Task.objects.all().order_by('-status', 'date_end')
     return render(request, 'projects/task_my_list.html', {'title': 'My tasks', 'tasks': tasks})
 
 
@@ -104,3 +108,19 @@ def ProjectHomeView(request):
     else:
         my_progress = 0
     return render(request, 'projects/home.html', {'title': 'My homepage', 'tasks': my_tasks, 'projects': my_projects, 'my_progress': my_progress})
+
+
+@login_required(login_url='login')
+def TaskMakeDoneView(request, pk):
+    task = Task.objects.get(id=pk)
+    task.status = "DN"
+    task.save()
+    return HttpResponseRedirect(reverse_lazy('project-home'))
+
+
+@login_required(login_url='login')
+def TaskMakeInboxView(request, pk):
+    task = Task.objects.get(id=pk)
+    task.status = "IN"
+    task.save()
+    return HttpResponseRedirect(reverse_lazy('project-home'))

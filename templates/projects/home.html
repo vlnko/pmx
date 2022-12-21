@@ -23,7 +23,7 @@
 
 
 <br><br>
-<a href="{% url 'task-create' %}" class="btn-primary">Новая задача</a>
+<a href="{% url 'task-create' 0 %}" class="btn-primary">Новая задача</a>
 <a href="{% url 'project-create' %}" class="btn-primary">Новый проект</a>
 <br><br>
 <div class="home-cols">
@@ -45,6 +45,11 @@
                     <p class="status-{{ task.status }}">{{ task.get_status_display }}</p>
                     <a href="{%url 'task-update' task.id %}" style="height: 20px; margin-left: .4rem;"><img
                             src="{% static 'ic20-edit.svg' %}"></a>
+                    {% if not task.status == "DN" %}
+                        <a style="height: 20px; margin-left: .4rem;" href="{% url 'task-make-done' task.id %}"><img src="{% static 'ic20-check.png' %}"></a>
+                    {% else %}
+                        <a style="height: 20px; margin-left: .4rem;" href="{% url 'task-make-inbox' task.id %}"><img src="{% static 'ic20-check-p.png' %}"></a>
+                    {% endif %}
                     <!-- <a href="{%url 'task-delete' task.id %}" style="height: 20px; margin-left: .4rem;"><img src="{% static 'ic20-delete.svg' %}"></a> -->
                 </div>
             </div>

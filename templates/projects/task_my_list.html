@@ -4,7 +4,7 @@
 {% block title %}Проекты{% endblock title %}
 
 {% block content %}
-<h1>Мои задачи <a href="{% url 'task-create' %}" style="text-decoration: none;">+</a></h1>
+<h1>Все задачи <a href="{% url 'task-create' 0 %}" style="text-decoration: none;">+</a></h1>
 
 {% if tasks %}
 {% for task in tasks %}
@@ -13,7 +13,7 @@
         <div>
             <h3 style="margin: 0;" class="project-title">
                 <a href="{%url 'task-detail' task.id %}">
-                    {{ task.title }}
+                    {{ task.title }} (@{{ task.executor.username }})
                 </a>
             </h3>
             <p class="project-date"><b>{{ task.project }}/</b> до {{ task.date_end }}</p>

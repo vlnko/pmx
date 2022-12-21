@@ -4,7 +4,7 @@
 {% block title %}Детали проекта: {{ project.title }}{% endblock title %}
 
 {% block content %}
-    <h1>Проект {{ project.title }} <a href="{% url 'task-create' %}" style="text-decoration: none;">+</a></h1>
+    <h1>Проект {{ project.title }} <a href="{% url 'task-create' project.id %}" style="text-decoration: none;">+</a></h1>
     <div>
         <div class="flex-r">
             <div class="project-detail-left card">
@@ -14,7 +14,7 @@
                 </div>
                 <p>
                     <b>Срок</b>: {{ project.deadline }} 
-                    <span class="tag-grey">осталось {{ project.days_remaining }}</span>
+                    <span class="tag-grey">{{ project.days_remaining }}</span>
                 </p>
                 <p><b>Руководитель</b>: {{ project.head }}</p>
                 <b>Команда проекта</b>:
@@ -27,7 +27,7 @@
                 <div class="project-description">{{ project.description|safe|linebreaks }}</div>
                 <a class="btn-primary" href="{%url 'project-update' project.id %}" style="margin-top: 1rem;">Редактировать
                     проект</a>
-                <a href="{% url 'task-create' %}" class="btn-secondary">Добавить задачу</a>
+                <a href="{% url 'task-create' project.id %}" class="btn-secondary">Добавить задачу</a>
             </div>
 
             <div class="project-detail-right">
