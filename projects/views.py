@@ -30,15 +30,16 @@ class ProjectListView(LoginRequiredMixin, ListView):
 
 class ProjectUpdateView(LoginRequiredMixin, UpdateView):
     model = Project
-    fields = ['title', 'category', 'description', 'deadline', 'head', 'project_team']
+    fields = ['title', 'category', 'description',
+              'deadline', 'head', 'project_team']
     template_name = "projects/project_update.html"
 
     def get_success_url(self):
-       pk = self.kwargs["pk"]
-       return reverse_lazy("project-detail", kwargs={"pk": pk})
+        pk = self.kwargs["pk"]
+        return reverse_lazy("project-detail", kwargs={"pk": pk})
 
     def form_valid(self, form):
-        return super(ProjectUpdateView,self).form_valid(form)
+        return super(ProjectUpdateView, self).form_valid(form)
 
 
 class ProjectDeleteView(LoginRequiredMixin, DeleteView):
@@ -52,7 +53,7 @@ class TaskCreateView(LoginRequiredMixin, CreateView):
     template_name = "projects/task_create.html"
 
     def get(self, request, pr_id):
-        form = self.form_class(initial={'project':pr_id})
+        form = self.form_class(initial={'project': pr_id})
         return render(request, self.template_name, {'form': form})
 
     def post(self, request, *args, **kwargs):
@@ -71,15 +72,16 @@ class TaskDetailView(LoginRequiredMixin, DetailView):
 
 class TaskUpdateView(LoginRequiredMixin, UpdateView):
     model = Task
-    fields = ['project', 'title', 'status', 'description', 'date_start', 'date_end', 'executor', 'work_hours_plan', 'work_hours_fact']    
+    fields = ['project', 'title', 'status', 'description', 'date_start',
+              'date_end', 'executor', 'work_hours_plan', 'work_hours_fact']
     template_name = "projects/task_update.html"
 
     def get_success_url(self):
-       pk = self.kwargs["pk"]
-       return reverse_lazy("task-detail", kwargs={"pk": pk})
-    
+        pk = self.kwargs["pk"]
+        return reverse_lazy("task-detail", kwargs={"pk": pk})
+
     def form_valid(self, form):
-        return super(TaskUpdateView,self).form_valid(form)
+        return super(TaskUpdateView, self).form_valid(form)
 
 
 class TaskDeleteView(LoginRequiredMixin, DeleteView):
@@ -87,8 +89,8 @@ class TaskDeleteView(LoginRequiredMixin, DeleteView):
     template_name = "projects/task_delete.html"
 
     def get_success_url(self):
-       pk = self.object.project.id
-       return reverse_lazy("project-detail", kwargs={"pk": pk})
+        pk = self.object.project.id
+        return reverse_lazy("project-detail", kwargs={"pk": pk})
 
 
 @login_required(login_url='login')
@@ -99,12 +101,16 @@ def MyTasksView(request):
 
 @login_required(login_url='login')
 def ProjectHomeView(request):
-    my_tasks = Task.objects.all().filter(executor=request.user).order_by('-status', 'date_end')
-    my_projects = Project.objects.all().filter(project_team=request.user).order_by('deadline')
+    my_tasks = Task.objects.all().filter(
+        executor=request.user).order_by('-status', 'date_end')
+    my_projects = Project.objects.all().filter(
+        project_team=request.user).order_by('deadline')
     count_my_tasks_all = len(Task.objects.all().filter(executor=request.user))
-    count_my_tasks_done = len(Task.objects.all().filter(executor=request.user).filter(status='DN'))
+    count_my_tasks_done = len(Task.objects.all().filter(
+        executor=request.user).filter(status='DN'))
     if count_my_tasks_all > 0:
-        my_progress = str(int(count_my_tasks_done / count_my_tasks_all * 100)) + '%'
+        my_progress = str(
+            int(count_my_tasks_done / count_my_tasks_all * 100)) + '%'
     else:
         my_progress = 0
     return render(request, 'projects/home.html', {'title': 'My homepage', 'tasks': my_tasks, 'projects': my_projects, 'my_progress': my_progress})
@@ -127,5 +133,6 @@ def TaskMakeInboxView(request, pk):
 
 
 def getTasks(request):
-    tasks = Task.objects.all().filter(executor=request.user).order_by('-status', 'date_end')
+    tasks = Task.objects.all().filter(
+        executor=request.user).order_by('-status', 'date_end')
     return render(request, 'projects/taskx.html', {'tasks': tasks})

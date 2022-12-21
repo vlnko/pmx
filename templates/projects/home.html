@@ -46,9 +46,11 @@
                     <a href="{%url 'task-update' task.id %}" style="height: 20px; margin-left: .4rem;"><img
                             src="{% static 'ic20-edit.svg' %}"></a>
                     {% if not task.status == "DN" %}
-                        <a style="height: 20px; margin-left: .4rem;" hx-get="{% url 'task-make-done' task.id %}" hx-target="#taskx"><img src="{% static 'ic20-check.png' %}"></a>
+                    <a style="height: 20px; margin-left: .4rem;" hx-get="{% url 'task-make-done' task.id %}"
+                        hx-target="#taskx"><img src="{% static 'ic20-check.png' %}"></a>
                     {% else %}
-                        <a style="height: 20px; margin-left: .4rem;" hx-get="{% url 'task-make-inbox' task.id %}" hx-target="#taskx"><img src="{% static 'ic20-check-p.png' %}"></a>
+                    <a style="height: 20px; margin-left: .4rem;" hx-get="{% url 'task-make-inbox' task.id %}"
+                        hx-target="#taskx"><img src="{% static 'ic20-check-p.png' %}"></a>
                     {% endif %}
                     <!-- <a href="{%url 'task-delete' task.id %}" style="height: 20px; margin-left: .4rem;"><img src="{% static 'ic20-delete.svg' %}"></a> -->
                 </div>
@@ -86,7 +88,7 @@
                 <div class="space-between" style="align-items: center;">
                     <p class="project-date">{{ project.days_remaining }}</p>
                     <div>
-                        <a href="{%url 'project-update' project.id %}" style="margin: 2rem .4rem; 0 0"><img
+                        <a href="{%url 'project-update' project.id %}" style="margin: 2rem .4rem;"><img
                                 style="height: 20px;" src="{% static 'ic20-edit.svg' %}"></a>
                         <a href="{%url 'project-delete' project.id %}" style="height: 20px;"><img style="height: 20px;"
                                 src="{% static 'ic20-delete.svg' %}"></a>

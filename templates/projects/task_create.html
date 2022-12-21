@@ -10,16 +10,14 @@
 <form method="post">
     {% csrf_token %}
     {% for field in form %}
-        <p>
-            {{ field.label_tag }}<br>
-            {{ field }}
-        </p>
-	{% endfor %}
+    <p>
+        {{ field.label_tag }}<br>
+        {{ field }}
+    </p>
+    {% endfor %}
     <input type="submit" value="Создать новую задачу">
-  </form>
+</form>
 
 
 
 {% endblock content %}
-
-

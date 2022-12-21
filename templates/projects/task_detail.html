@@ -4,26 +4,24 @@
 {% block title %}Детали задачи: {{ task.title }}{% endblock title %}
 
 {% block content %}
-    <h1>Детали задачи {{ task.title }}</h1>
-    
-    <a href="{% url 'project-detail' task.project.id %}" class="btn-secondary" style="margin-bottom: 1rem;">К проекту</a>
-    <a href="{% url 'project-home' %}" class="btn-secondary" style="margin-bottom: 1rem;">К моим задачам</a>
-    <div class="card">
-        <div class="space-between">
-            <div>
-                <p class="project-date">Дата начала: {{ task.date_start }}</p>
-                <p class="project-date">Дэдлайн: {{ task.date_end }}</p>        
-            </div>
-            <p class="status-{{ task.status }}">{{ task.get_status_display }}</p>
+<h1>Детали задачи {{ task.title }}</h1>
+
+<a href="{% url 'project-detail' task.project.id %}" class="btn-secondary" style="margin-bottom: 1rem;">К проекту</a>
+<a href="{% url 'project-home' %}" class="btn-secondary" style="margin-bottom: 1rem;">К моим задачам</a>
+<div class="card">
+    <div class="space-between">
+        <div>
+            <p class="project-date">Дата начала: {{ task.date_start }}</p>
+            <p class="project-date">Дэдлайн: {{ task.date_end }}</p>
         </div>
-        <p><b>Проект</b>: {{ task.project }}</p>
-        <p><b>Исполнитель</b>: {{ task.executor }}</p>
-        <p><b>Часы (план)</b>: {{ task.work_hours_plan }}</p>
-        <p><b>Часы (факт)</b>: {{ task.work_hours_fact }}</p>
-        <div class="project-description">{{ task.description|safe|linebreaks }}</div>
+        <p class="status-{{ task.status }}">{{ task.get_status_display }}</p>
     </div>
+    <p><b>Проект</b>: {{ task.project }}</p>
+    <p><b>Исполнитель</b>: {{ task.executor }}</p>
+    <p><b>Часы (план)</b>: {{ task.work_hours_plan }}</p>
+    <p><b>Часы (факт)</b>: {{ task.work_hours_fact }}</p>
+    <div class="project-description">{{ task.description|safe|linebreaks }}</div>
+</div>
 
-    <a href="{%url 'task-update' task.id %}" class="btn-primary" style="margin-top: 1rem;">Изменить</a>
+<a href="{%url 'task-update' task.id %}" class="btn-primary" style="margin-top: 1rem;">Изменить</a>
 {% endblock %}
-
-

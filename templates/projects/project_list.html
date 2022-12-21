@@ -4,53 +4,52 @@
 {% block title %}Проекты{% endblock title %}
 
 {% block content %}
-    <h1>Все проекты <a href="{% url 'project-create' %}" style="text-decoration: none;">+</a></h1>
+<h1>Все проекты <a href="{% url 'project-create' %}" style="text-decoration: none;">+</a></h1>
 
-    {% if projects %}
-    <!-- <div class="card"> -->
-        <!-- <h2 style="margin-top: 0;">Active projects</h2> -->
-        
-        <div class="projects-container">
-            
-            {% for project in projects %}
-            <div class="card project-card" style="margin-bottom: 1rem;">
-                <div class="top">
-                    <div class="space-between">
-                        <span class="project-date">{{ project.deadline }}</span>
-                        <span class="project-tasks-num">{{ project.get_tasks|length }}</span>
-                    </div>
-                    <h4 class="project-title">
-                        <a href="{%url 'project-detail' project.id %}">
-                        {{ project.title }}
-                        </a>
-                    </h4>
-                    <p class="project-category">{{ project.category}}</p>
-                    <div class="space-between">
-                        <p class="project-progress">Прогресс:</p>
-                        <p class="project-progress">{{ project.progress }} %</p>
-                    </div>
-                    <progress value="{{ project.progress }}" max="100"></progress>
-                </div>
-                <div class="bottom">
-                    <div class="space-between" style="align-items: center;">
-                        <p class="project-date">{{ project.days_remaining }}</p>
-                        <div>
-                            <a href="{%url 'project-update' project.id %}" style="margin: 2rem .4rem; 0 0"><img style="height: 20px;" src="{% static 'ic20-edit.svg' %}"></a>
-                            <a href="{%url 'project-delete' project.id %}" style="height: 20px;"><img style="height: 20px;" src="{% static 'ic20-delete.svg' %}"></a>       
-                        </div>
-                        
-                    </div>
-                </div>
+{% if projects %}
+<!-- <div class="card"> -->
+<!-- <h2 style="margin-top: 0;">Active projects</h2> -->
+
+<div class="projects-container">
+
+    {% for project in projects %}
+    <div class="card project-card" style="margin-bottom: 1rem;">
+        <div class="top">
+            <div class="space-between">
+                <span class="project-date">{{ project.deadline }}</span>
+                <span class="project-tasks-num">{{ project.get_tasks|length }}</span>
             </div>
-            {% endfor %}
+            <h4 class="project-title">
+                <a href="{%url 'project-detail' project.id %}">
+                    {{ project.title }}
+                </a>
+            </h4>
+            <p class="project-category">{{ project.category}}</p>
+            <div class="space-between">
+                <p class="project-progress">Прогресс:</p>
+                <p class="project-progress">{{ project.progress }} %</p>
+            </div>
+            <progress value="{{ project.progress }}" max="100"></progress>
         </div>
-        {% else %}
-        
-            <h3>You have no projects yet.</h3>
-        {% endif %}
-    <!-- </div> -->
+        <div class="bottom">
+            <div class="space-between" style="align-items: center;">
+                <p class="project-date">{{ project.days_remaining }}</p>
+                <div>
+                    <a href="{%url 'project-update' project.id %}" style="margin: 2rem .4rem;"><img
+                            style="height: 20px;" src="{% static 'ic20-edit.svg' %}"></a>
+                    <a href="{%url 'project-delete' project.id %}" style="height: 20px;"><img style="height: 20px;"
+                            src="{% static 'ic20-delete.svg' %}"></a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% else %}
+
+<h3>You have no projects yet.</h3>
+{% endif %}
+<!-- </div> -->
 
 {% endblock content %}
-
-
-
