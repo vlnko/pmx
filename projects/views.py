@@ -115,7 +115,7 @@ def TaskMakeDoneView(request, pk):
     task = Task.objects.get(id=pk)
     task.status = "DN"
     task.save()
-    return HttpResponseRedirect(reverse_lazy('project-home'))
+    return HttpResponseRedirect(reverse_lazy('get-tasks'))
 
 
 @login_required(login_url='login')
@@ -123,4 +123,9 @@ def TaskMakeInboxView(request, pk):
     task = Task.objects.get(id=pk)
     task.status = "IN"
     task.save()
-    return HttpResponseRedirect(reverse_lazy('project-home'))
+    return HttpResponseRedirect(reverse_lazy('get-tasks'))
+
+
+def getTasks(request):
+    tasks = Task.objects.all().filter(executor=request.user).order_by('-status', 'date_end')
+    return render(request, 'projects/taskx.html', {'tasks': tasks})

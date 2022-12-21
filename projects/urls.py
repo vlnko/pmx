@@ -16,4 +16,5 @@ urlpatterns = [
     path('t/makedone/<int:pk>/', TaskMakeDoneView, name='task-make-done'),
     path('t/makeinbox/<int:pk>/', TaskMakeInboxView, name='task-make-inbox'),
     path('t/my/', MyTasksView, name='task-my'),
+    path('t/get/', getTasks, name='get-tasks'),
 ]

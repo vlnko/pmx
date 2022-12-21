@@ -1,0 +1,31 @@
+{% load static %}
+<h2>Мои задачи</h2>
+{% if tasks %}
+        {% for task in tasks %}
+        <div class="card project-card">
+            <div class="space-between">
+                <div>
+                    <h3 style="margin: 0;" class="project-title">
+                        <a href="{%url 'task-detail' task.id %}">
+                            {{ task.title }}
+                        </a>
+                    </h3>
+                    <p class="project-date"><b>{{ task.project }}/</b> до {{ task.date_end }}</p>
+                </div>
+                <div style="display: flex; align-items: center;">
+                    <p class="status-{{ task.status }}">{{ task.get_status_display }}</p>
+                    <a href="{%url 'task-update' task.id %}" style="height: 20px; margin-left: .4rem;"><img
+                            src="{% static 'ic20-edit.svg' %}"></a>
+                        {% if not task.status == "DN" %}
+                            <a style="height: 20px; margin-left: .4rem;" hx-get="{% url 'task-make-done' task.id %}" hx-target="#taskx"><img src="{% static 'ic20-check.png' %}"></a>
+                        {% else %}
+                            <a style="height: 20px; margin-left: .4rem;" hx-get="{% url 'task-make-inbox' task.id %}" hx-target="#taskx"><img src="{% static 'ic20-check-p.png' %}"></a>
+                        {% endif %}
+                        <!-- <a href="{%url 'task-delete' task.id %}" style="height: 20px; margin-left: .4rem;"><img src="{% static 'ic20-delete.svg' %}"></a> -->
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+        {% else %}
+        <h3>У тебя пока нет задач.</h3>
+        {% endif %}
