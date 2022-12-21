@@ -17,10 +17,10 @@
             <a href="{%url 'task-update' task.id %}" style="height: 20px; margin-left: .4rem;"><img
                     src="{% static 'ic20-edit.svg' %}"></a>
             {% if not task.status == "DN" %}
-            <a style="height: 20px; margin-left: .4rem;" hx-get="{% url 'task-make-done' task.id %}"
+            <a href="" style="height: 20px; margin-left: .4rem;" hx-get="{% url 'task-make-done' task.id %}"
                 hx-target="#taskx"><img src="{% static 'ic20-check.png' %}"></a>
             {% else %}
-            <a style="height: 20px; margin-left: .4rem;" hx-get="{% url 'task-make-inbox' task.id %}"
+            <a href="" style="height: 20px; margin-left: .4rem;" hx-get="{% url 'task-make-inbox' task.id %}"
                 hx-target="#taskx"><img src="{% static 'ic20-check-p.png' %}"></a>
             {% endif %}
             <!-- <a href="{%url 'task-delete' task.id %}" style="height: 20px; margin-left: .4rem;"><img src="{% static 'ic20-delete.svg' %}"></a> -->

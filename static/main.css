@@ -345,3 +345,7 @@ textarea {
 .infocard.yellow {
   background: linear-gradient(60deg, #FFB32E 0%, #ffc45f 100%);
 }
+
+a:hover {
+  cursor: pointer;
+}

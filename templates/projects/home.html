@@ -9,7 +9,7 @@
 <div class="infobox">
     <div class="infocard green">
         <span>Мой прогресс</span>
-        <h1>{{ my_progress }}</h1>
+        <h1 hx-trigger="htmx:afterSwap from:#taskx" hx-get="{% url 'getmyprogress' %}">{{ my_progress }}</h1>
     </div>
     <div class="infocard purple">
         <span>Моих задач</span>
@@ -46,10 +46,10 @@
                     <a href="{%url 'task-update' task.id %}" style="height: 20px; margin-left: .4rem;"><img
                             src="{% static 'ic20-edit.svg' %}"></a>
                     {% if not task.status == "DN" %}
-                    <a style="height: 20px; margin-left: .4rem;" hx-get="{% url 'task-make-done' task.id %}"
+                    <a href="" style="height: 20px; margin-left: .4rem;" hx-get="{% url 'task-make-done' task.id %}"
                         hx-target="#taskx"><img src="{% static 'ic20-check.png' %}"></a>
                     {% else %}
-                    <a style="height: 20px; margin-left: .4rem;" hx-get="{% url 'task-make-inbox' task.id %}"
+                    <a href="" style="height: 20px; margin-left: .4rem;" hx-get="{% url 'task-make-inbox' task.id %}"
                         hx-target="#taskx"><img src="{% static 'ic20-check-p.png' %}"></a>
                     {% endif %}
                     <!-- <a href="{%url 'task-delete' task.id %}" style="height: 20px; margin-left: .4rem;"><img src="{% static 'ic20-delete.svg' %}"></a> -->

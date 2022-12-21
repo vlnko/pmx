@@ -116,6 +116,18 @@ def ProjectHomeView(request):
     return render(request, 'projects/home.html', {'title': 'My homepage', 'tasks': my_tasks, 'projects': my_projects, 'my_progress': my_progress})
 
 
+def getMyProgress(request):
+    count_my_tasks_all = len(Task.objects.all().filter(executor=request.user))
+    count_my_tasks_done = len(Task.objects.all().filter(
+        executor=request.user).filter(status='DN'))
+    if count_my_tasks_all > 0:
+        my_progress = str(
+            int(count_my_tasks_done / count_my_tasks_all * 100)) + '%'
+    else:
+        my_progress = 0
+    return render(request, 'projects/progressx.html', {'progress': my_progress})
+
+
 @login_required(login_url='login')
 def TaskMakeDoneView(request, pk):
     task = Task.objects.get(id=pk)
