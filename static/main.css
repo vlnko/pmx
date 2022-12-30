@@ -18,15 +18,21 @@ body {
   background-color: #fbfbfb;
   padding: 2rem;
   border-radius: 1rem;
+  width: 100%;
+  box-sizing: border-box;
+
 }
 .home-cols {
+  width: 100%;
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(auto-fit, minmax(25rem, 1fr));
   gap: 1rem;
 }
 .container {
   width: 100%;
   padding: 3rem;
+  box-sizing: border-box;
+
 }
 
 a {
@@ -321,8 +327,9 @@ textarea {
 
 .infobox {
   display: grid; 
+  width: 100%;
   gap: 1rem; 
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
 }
 
 .infocard {
