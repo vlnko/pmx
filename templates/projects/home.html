@@ -31,34 +31,10 @@
         <h2>Мои задачи</h2>
         {% if tasks %}
         {% for task in tasks %}
-<div class="card project-card">
-    <div class="space-between">
-        <div>
-            <h3 style="margin: 0;" class="project-title">
-                <a href="{%url 'task-detail' task.id %}">
-                    {{ task.title }}
-                </a>
-            </h3>
-            <p class="project-date"><b>{{ task.project }}/</b> до {{ task.date_end }}</p>
-        </div>
-        <div style="display: flex; align-items: center;">
-            <p class="status-{{ task.status }}">{{ task.get_status_display }}</p>
-            <a href="{%url 'task-update' task.id %}" style="height: 20px; margin-left: .4rem;"><img
-                    src="{% static 'ic20-edit.svg' %}"></a>
-            {% if not task.status == "ED" %}
-            <a href="" style="height: 20px; margin-left: .4rem;" hx-get="{% url 'task-make-done' task.id %}"
-                hx-target="#taskx"><img src="{% static 'ic20-check.png' %}"></a>
-            {% else %}
-            <a href="" style="height: 20px; margin-left: .4rem;" hx-get="{% url 'task-make-inbox' task.id %}"
-                hx-target="#taskx"><img src="{% static 'ic20-check-p.png' %}"></a>
-            {% endif %}
-            <!-- <a href="{%url 'task-delete' task.id %}" style="height: 20px; margin-left: .4rem;"><img src="{% static 'ic20-delete.svg' %}"></a> -->
-        </div>
-    </div>
-</div>
-{% endfor %}
+            {% include "projects/comp/task-card.html" %}
+        {% endfor %}
         {% else %}
-        <h3>У тебя пока нет задач.</h3>
+            <h3>У тебя пока нет задач.</h3>
         {% endif %}
     </div>
 
@@ -66,40 +42,10 @@
         <h2>Мои проекты</h2>
         {% if projects %}
         {% for project in projects %}
-        <div class="card project-card" style="margin-bottom: 1rem;">
-            <div class="top">
-                <div class="space-between">
-                    <span class="project-date">{{ project.deadline }}</span>
-                    <span class="project-tasks-num">{{ project.get_tasks|length }}</span>
-                </div>
-                <h4 class="project-title">
-                    <a href="{%url 'project-detail' project.id %}">
-                        {{ project.title }}
-                    </a>
-                </h4>
-                <p class="project-category">{{ project.category}}</p>
-                <div class="space-between">
-                    <p class="project-progress">Прогресс:</p>
-                    <p class="project-progress">{{ project.progress }} %</p>
-                </div>
-                <progress value="{{ project.progress }}" max="100"></progress>
-            </div>
-            <div class="bottom">
-                <div class="space-between" style="align-items: center;">
-                    <p class="project-date">{{ project.days_remaining }}</p>
-                    <div>
-                        <a href="{%url 'project-update' project.id %}" style="margin: 2rem .4rem;"><img
-                                style="height: 20px;" src="{% static 'ic20-edit.svg' %}"></a>
-                        <a href="{%url 'project-delete' project.id %}" style="height: 20px;"><img style="height: 20px;"
-                                src="{% static 'ic20-delete.svg' %}"></a>
-                    </div>
-
-                </div>
-            </div>
-        </div>
+            {% include "projects/comp/proj-card.html" %}
         {% endfor %}
         {% else %}
-        <h3>Ты пока не участвуешь ни в одном проекте.</h3>
+            <h3>Ты пока не участвуешь ни в одном проекте.</h3>
         {% endif %}
     </div>
 
