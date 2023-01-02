@@ -20,7 +20,6 @@ body {
   border-radius: 1rem;
   width: 100%;
   box-sizing: border-box;
-
 }
 .home-cols {
   width: 100%;
@@ -251,7 +250,7 @@ progress[value]::-moz-progress-bar {
 .task:last-child {
   margin-bottom: 0;
 }
-.status-DN {
+.status-ED {
   color: white;
   background: linear-gradient(60deg, #30e39e 0%, #40e2ac 100%);
   padding: 0.3rem 0.55rem 0.2rem;
@@ -259,10 +258,10 @@ progress[value]::-moz-progress-bar {
   border-radius: 4rem;
   display: inline-block;
 }
-.status-IN,
-.status-WO,
-.status-CK,
-.status-RW {
+.status-AI,
+.status-BW,
+.status-CC,
+.status-DR {
   color: grey;
   background-color: #e1e1e1;
   padding: 0.3rem 0.55rem 0.2rem;
@@ -355,4 +354,14 @@ textarea {
 
 a:hover {
   cursor: pointer;
+}
+
+.statuses.hidden {
+  display: none;
+}
+.statuses {
+  display: flex;
+  gap: 1rem;
+  position: relative;
+  top: 1rem;
 }

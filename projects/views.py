@@ -4,12 +4,15 @@ from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
 from django.views.generic import TemplateView
 from django.contrib.auth.mixins import LoginRequiredMixin
-from .models import Project, Task
-from .forms import ProjectCreateForm, TaskCreateForm
+from django.contrib.auth.decorators import login_required
+from .models import *
+from .forms import *
 from django.http import HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 
+
+# Project views
 
 class ProjectDetailView(LoginRequiredMixin, DetailView):
     model = Project
@@ -47,6 +50,8 @@ class ProjectDeleteView(LoginRequiredMixin, DeleteView):
     success_url = reverse_lazy("project-all")
     template_name = "projects/project_delete.html"
 
+
+# Task views
 
 class TaskCreateView(LoginRequiredMixin, CreateView):
     form_class = TaskCreateForm
@@ -94,15 +99,15 @@ class TaskDeleteView(LoginRequiredMixin, DeleteView):
 
 
 @login_required(login_url='login')
-def MyTasksView(request):
-    tasks = Task.objects.all().order_by('-status', 'date_end')
+def MyTasksView(request): # actually returns all tasks
+    tasks = Task.objects.all().order_by('status', 'date_end')
     return render(request, 'projects/task_my_list.html', {'title': 'My tasks', 'tasks': tasks})
 
 
 @login_required(login_url='login')
 def ProjectHomeView(request):
     my_tasks = Task.objects.all().filter(
-        executor=request.user).order_by('-status', 'date_end')
+        executor=request.user).order_by('status', 'date_end')
     my_projects = Project.objects.all().filter(
         project_team=request.user).order_by('deadline')
     count_my_tasks_all = len(Task.objects.all().filter(executor=request.user))
@@ -116,7 +121,7 @@ def ProjectHomeView(request):
     return render(request, 'projects/home.html', {'title': 'My homepage', 'tasks': my_tasks, 'projects': my_projects, 'my_progress': my_progress})
 
 
-def getMyProgress(request):
+def getMyProgress(request): # returns progress info for widget
     count_my_tasks_all = len(Task.objects.all().filter(executor=request.user))
     count_my_tasks_done = len(Task.objects.all().filter(
         executor=request.user).filter(status='DN'))
@@ -128,23 +133,49 @@ def getMyProgress(request):
     return render(request, 'projects/progressx.html', {'progress': my_progress})
 
 
+# Functions setting task statuses
+
 @login_required(login_url='login')
-def TaskMakeDoneView(request, pk):
+def TaskMakeInboxView(request, pk): # makes status inbox
     task = Task.objects.get(id=pk)
-    task.status = "DN"
+    task.status = "AI"
     task.save()
     return HttpResponseRedirect(reverse_lazy('get-tasks'))
 
 
 @login_required(login_url='login')
-def TaskMakeInboxView(request, pk):
+def TaskMakeWorkingView(request, pk): # makes status working
     task = Task.objects.get(id=pk)
-    task.status = "IN"
+    task.status = "BW"
     task.save()
     return HttpResponseRedirect(reverse_lazy('get-tasks'))
 
 
-def getTasks(request):
+@login_required(login_url='login')
+def TaskMakeCheckingView(request, pk): # makes status checking
+    task = Task.objects.get(id=pk)
+    task.status = "CC"
+    task.save()
+    return HttpResponseRedirect(reverse_lazy('get-tasks'))
+
+
+@login_required(login_url='login')
+def TaskMakeReworkingView(request, pk): # makes status reworking
+    task = Task.objects.get(id=pk)
+    task.status = "DR"
+    task.save()
+    return HttpResponseRedirect(reverse_lazy('get-tasks'))
+
+
+@login_required(login_url='login')
+def TaskMakeDoneView(request, pk): # makes status done
+    task = Task.objects.get(id=pk)
+    task.status = "ED"
+    task.save()
+    return HttpResponseRedirect(reverse_lazy('get-tasks'))
+
+
+def getTasks(request): # gets all tasks for current user
     tasks = Task.objects.all().filter(
-        executor=request.user).order_by('-status', 'date_end')
+        executor=request.user).order_by('status', 'date_end')
     return render(request, 'projects/taskx.html', {'tasks': tasks})
