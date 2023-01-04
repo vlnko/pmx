@@ -14,6 +14,23 @@ from django.shortcuts import render
 
 # Project views
 
+@login_required(login_url='login')
+def ProjectHomeView(request):
+    my_tasks = Task.objects.all().filter(
+        executor=request.user).order_by('status', 'date_end')
+    my_projects = Project.objects.all().filter(
+        project_team=request.user).order_by('deadline')
+    count_my_tasks_all = len(Task.objects.all().filter(executor=request.user))
+    count_my_tasks_done = len(Task.objects.all().filter(
+        executor=request.user).filter(status='DN'))
+    if count_my_tasks_all > 0:
+        my_progress = str(
+            int(count_my_tasks_done / count_my_tasks_all * 100)) + '%'
+    else:
+        my_progress = 0
+    return render(request, 'projects/home.html', {'title': 'My homepage', 'tasks': my_tasks, 'projects': my_projects, 'my_progress': my_progress})
+
+
 class ProjectDetailView(LoginRequiredMixin, DetailView):
     model = Project
     template_name = "projects/project_detail.html"
@@ -104,35 +121,6 @@ def MyTasksView(request): # actually returns all tasks
     return render(request, 'projects/task_my_list.html', {'title': 'My tasks', 'tasks': tasks})
 
 
-@login_required(login_url='login')
-def ProjectHomeView(request):
-    my_tasks = Task.objects.all().filter(
-        executor=request.user).order_by('status', 'date_end')
-    my_projects = Project.objects.all().filter(
-        project_team=request.user).order_by('deadline')
-    count_my_tasks_all = len(Task.objects.all().filter(executor=request.user))
-    count_my_tasks_done = len(Task.objects.all().filter(
-        executor=request.user).filter(status='DN'))
-    if count_my_tasks_all > 0:
-        my_progress = str(
-            int(count_my_tasks_done / count_my_tasks_all * 100)) + '%'
-    else:
-        my_progress = 0
-    return render(request, 'projects/home.html', {'title': 'My homepage', 'tasks': my_tasks, 'projects': my_projects, 'my_progress': my_progress})
-
-
-def getMyProgress(request): # returns progress info for widget
-    count_my_tasks_all = len(Task.objects.all().filter(executor=request.user))
-    count_my_tasks_done = len(Task.objects.all().filter(
-        executor=request.user).filter(status='DN'))
-    if count_my_tasks_all > 0:
-        my_progress = str(
-            int(count_my_tasks_done / count_my_tasks_all * 100)) + '%'
-    else:
-        my_progress = 0
-    return render(request, 'projects/progressx.html', {'progress': my_progress})
-
-
 # Functions setting task statuses
 
 @login_required(login_url='login')
@@ -179,3 +167,18 @@ def getTasks(request): # gets all tasks for current user
     tasks = Task.objects.all().filter(
         executor=request.user).order_by('status', 'date_end')
     return render(request, 'projects/taskx.html', {'tasks': tasks})
+
+
+# Utility views
+
+def getMyProgress(request): # returns progress info for widget
+    count_my_tasks_all = len(Task.objects.all().filter(executor=request.user))
+    count_my_tasks_done = len(Task.objects.all().filter(
+        executor=request.user).filter(status='DN'))
+    if count_my_tasks_all > 0:
+        my_progress = str(
+            int(count_my_tasks_done / count_my_tasks_all * 100)) + '%'
+    else:
+        my_progress = 0
+    # return my_progress
+    return render(request, 'projects/progressx.html', {'progress': my_progress})

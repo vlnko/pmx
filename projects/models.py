@@ -44,7 +44,7 @@ class Project(models.Model):
 
     def progress(self): # gets percentage of tasks done in the project
         count_tasks_all = len(self.task_set.all())
-        count_tasks_done = len(self.task_set.all().filter(status="DN"))
+        count_tasks_done = len(self.task_set.all().filter(status="ED"))
         if count_tasks_all > 0:
             percent = count_tasks_done / count_tasks_all * 100
             p = int(percent)
@@ -53,7 +53,7 @@ class Project(models.Model):
         return p
     
     def get_tasks(self): # gets all tasks related to the project
-        tasks = self.task_set.all().order_by('date_end')
+        tasks = self.task_set.all().order_by('status', 'date_end')
         return tasks
     
 
@@ -91,9 +91,3 @@ class Task(models.Model):
             return f"{self.title} (late for {delta})"
         else:
             return self.title
-
-    # def is_late(self):
-    #     if datetime.datetime.now() > self.date_end and self.status != "DN":
-    #         return True
-    #     else:
-    #         return False
