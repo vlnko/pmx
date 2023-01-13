@@ -9,30 +9,48 @@
 
 <form method="post">
     {% csrf_token %}
-    {% for field in form %}
+    <div class="f-2col">
+        <div>
+            {{ form.project.label_tag }}
+            {{ form.project }}
+        </div>
+        <div>
+            {{ form.title.label_tag }}
+            {{ form.title }}
+        </div>
+    </div>
     <p>
-        {{ field.label_tag }}<br>
-        {{ field }}
+        {{ form.description.label_tag }}
+        {{ form.description }}
     </p>
-    {% endfor %}
-
-
+    <div class="f-2col">
+        <div>
+            {{ form.date_start.label_tag }}
+            {{ form.date_start }}
+        </div>
+        <div>
+            {{ form.date_end.label_tag }}
+            {{ form.date_end }}
+        </div>
+    </div>
+    <br>
+    <div class="f-2col">
+        <div>
+            {{ form.work_hours_plan.label_tag }}
+            {{ form.work_hours_plan }}
+        </div>
+        <div>
+            {{ form.work_hours_fact.label_tag }}
+            {{ form.work_hours_fact }}
+        </div>
+    </div>
+    <p>
+        {{ form.executor.label_tag }}
+        {{ form.executor }}
+    </p>
     <input type="submit" value="Создать новую задачу">
 </form>
 
 
 
 {% endblock content %}
-
-{% block script %}
-$(function(){
-    $("input[name='date_start']").datepicker({
-        dateFormat: "dd.mm.yy",
-        firstDay: 1
-    });
-    $("input[name="date_end"]").datepicker({
-        dateFormat: "dd.mm.yy",
-        firstDay: 1
-    });
-})
-{% endblock script %}
