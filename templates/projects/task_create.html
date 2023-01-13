@@ -15,9 +15,24 @@
         {{ field }}
     </p>
     {% endfor %}
+
+
     <input type="submit" value="Создать новую задачу">
 </form>
 
 
 
 {% endblock content %}
+
+{% block script %}
+$(function(){
+    $("input[name='date_start']").datepicker({
+        dateFormat: "dd.mm.yy",
+        firstDay: 1
+    });
+    $("input[name="date_end"]").datepicker({
+        dateFormat: "dd.mm.yy",
+        firstDay: 1
+    });
+})
+{% endblock script %}

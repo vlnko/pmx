@@ -50,8 +50,7 @@ class ProjectListView(LoginRequiredMixin, ListView):
 
 class ProjectUpdateView(LoginRequiredMixin, UpdateView):
     model = Project
-    fields = ['title', 'category', 'description',
-              'deadline', 'head', 'project_team']
+    form_class = ProjectUpdateForm
     template_name = "projects/project_update.html"
 
     def get_success_url(self):
@@ -94,8 +93,7 @@ class TaskDetailView(LoginRequiredMixin, DetailView):
 
 class TaskUpdateView(LoginRequiredMixin, UpdateView):
     model = Task
-    fields = ['project', 'title', 'status', 'description', 'date_start',
-              'date_end', 'executor', 'work_hours_plan', 'work_hours_fact']
+    form_class = TaskUpdateForm
     template_name = "projects/task_update.html"
 
     def get_success_url(self):

@@ -13,6 +13,7 @@ body {
   font-family: 'Overpass', sans-serif;
   background-color: #ebebeb;
   display: flex;
+  box-sizing: border-box;
 }
 .card {
   background-color: #fbfbfb;
@@ -31,7 +32,6 @@ body {
   width: 100%;
   padding: 3rem;
   box-sizing: border-box;
-
 }
 
 a {
