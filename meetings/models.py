@@ -12,7 +12,7 @@ class Meeting(models.Model):
     participators = models.ManyToManyField(CustomUser, related_name='participators', verbose_name='Участники')
 
     def __str__(self):
-        return f'{title} - {date}'
+        return f'{self.title} - {self.date}'
 
     class Meta:
         verbose_name = 'Совещание'

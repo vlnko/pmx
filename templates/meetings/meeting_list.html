@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}meetings{% endblock title %}
+
+{% block content %}
+    <h1>Все meetings</h1>
+
+    {% if meetings %}
+
+        {% for meeting in meetings %}
+            <p>{{ meeting.title }}</p>
+        {% endfor %}
+        
+    {% else %}
+        You have no meetings.
+    {% endif %}
+
+{% endblock content %}
