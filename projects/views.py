@@ -74,7 +74,7 @@ class TaskCreateView(LoginRequiredMixin, CreateView):
     template_name = "projects/task_create.html"
 
     def get(self, request, pr_id):
-        form = self.form_class(initial={'project': pr_id})
+        form = self.form_class(initial={'project': pr_id, 'executor': request.user})
         return render(request, self.template_name, {'form': form})
 
     def post(self, request, *args, **kwargs):
@@ -173,10 +173,11 @@ def getMyProgress(request): # returns progress info for widget
     count_my_tasks_all = len(Task.objects.all().filter(executor=request.user))
     count_my_tasks_done = len(Task.objects.all().filter(
         executor=request.user).filter(status='DN'))
+        
     if count_my_tasks_all > 0:
         my_progress = str(
             int(count_my_tasks_done / count_my_tasks_all * 100)) + '%'
     else:
         my_progress = 0
-    # return my_progress
+
     return render(request, 'projects/progressx.html', {'progress': my_progress})
