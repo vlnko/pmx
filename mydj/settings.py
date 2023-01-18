@@ -28,6 +28,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'ckeditor',
     'pages',
     'accounts',
     'api',
@@ -140,3 +141,5 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.BasicAuthentication',
     ]
 }
+
+CKEDITOR_BASEPATH = "/staticfiles/ckeditor/ckeditor/"

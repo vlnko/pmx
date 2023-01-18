@@ -24,7 +24,7 @@
                 {% endfor %}
             </ul>
             <p><b>Описание проекта</b>:</p>
-            <div class="project-description">{{ project.description|safe|linebreaks }}</div>
+            <div class="project-description">{{ project.description|safe }}</div>
             <a class="btn-primary" href="{%url 'project-update' project.id %}" style="margin-top: 1rem;">Редактировать
                 проект</a>
             <a href="{% url 'task-create' project.id %}" class="btn-secondary">Добавить задачу</a>

@@ -1,13 +1,14 @@
 from django.db import models
 import datetime, re
 from accounts.models import CustomUser
+from ckeditor.fields import RichTextField
 
 
 class Project(models.Model):
     id = models.AutoField(verbose_name='ID проекта', primary_key=True)
     title = models.CharField(verbose_name='Наименование проекта', max_length=24, blank=False)
     category = models.CharField(verbose_name='Категория', max_length=48)
-    description = models.TextField(verbose_name='Описание')
+    description = RichTextField(verbose_name='Описание')
     created = models.DateField(verbose_name='Создан', auto_now_add=True)
     deadline = models.DateField(
         default=datetime.date.today, auto_now=False, auto_now_add=False, verbose_name='Дедлайн')
@@ -73,7 +74,7 @@ class Task(models.Model):
     project = models.ForeignKey(Project, on_delete=models.CASCADE, verbose_name='Проект')
     title = models.CharField(verbose_name='Наименование задачи', max_length=100, blank=False)
     status = models.CharField(max_length=2, choices=Status.choices, default=Status.AI, verbose_name='Статус')
-    description = models.TextField(verbose_name='Описание')
+    description = RichTextField(verbose_name='Описание')
     created = models.DateField(verbose_name='Создан', auto_now_add=True)
     date_start = models.DateField(default=datetime.date.today, auto_now=False, auto_now_add=False, verbose_name='Дата начала')
     date_end = models.DateField(default=one_week_from_today, auto_now=False, auto_now_add=False, verbose_name='Дата окончания')
