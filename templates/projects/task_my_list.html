@@ -7,28 +7,11 @@
 <h1>Все задачи <a href="{% url 'task-create' 0 %}" style="text-decoration: none;">+</a></h1>
 
 {% if tasks %}
-{% for task in tasks %}
-<div class="card project-card">
-    <div class="space-between">
-        <div>
-            <h3 style="margin: 0;" class="project-title">
-                <a href="{%url 'task-detail' task.id %}">
-                    {{ task.title }} (@{{ task.executor.username }})
-                </a>
-            </h3>
-            <p class="project-date"><b>{{ task.project }}/</b> до {{ task.date_end }}</p>
-        </div>
-        <div style="display: flex; align-items: center;">
-            <p class="status-{{ task.status }}">{{ task.get_status_display }}</p>
-            <a href="{%url 'task-update' task.id %}" style="height: 20px; margin-left: .4rem;"><img
-                    src="{% static 'ic20-edit.svg' %}"></a>
-            <!-- <a href="{%url 'task-delete' task.id %}" style="height: 20px; margin-left: .4rem;"><img src="{% static 'ic20-delete.svg' %}"></a> -->
-        </div>
-    </div>
-</div>
-{% endfor %}
+    {% for task in tasks %}
+        {% include "projects/comp/task-card.html" %}
+    {% endfor %}
 {% else %}
-<h3>У тебя пока нет задач.</h3>
+    <h3>У тебя пока нет задач.</h3>
 {% endif %}
 
 

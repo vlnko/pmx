@@ -134,6 +134,13 @@ a.btn-primary:hover {
   background-color: #fff;
   box-shadow: 0px 12px 24px -12px rgba(0, 0, 0, 0.1);
   margin-bottom: 1rem;
+  transition: all .3s ease-in-out;
+
+}
+.project-card:hover {
+  transition: all .3s ease-in-out;
+  box-shadow: 0px 12px 24px -12px rgba(0, 0, 0, 0.2);
+  transform: scale(1.01, 1.01);
 }
 
 .project-card .top {
@@ -373,4 +380,36 @@ a:hover {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 1rem;
+}
+
+details summary::-webkit-details-marker {
+  display: none;
+}
+
+details.status-change {
+  font-size: .8rem;
+}
+
+details.status-change summary {
+  font-size: .8rem;
+  color: var(--col-prim);
+  list-style: none;
+  cursor: pointer;
+  margin-top: .3rem;
+}
+
+details.status-change div {
+  display: flex;
+  gap: .3rem;
+  margin-top: 0.5rem;
+}
+
+details.status-change a {
+  font-size: .8rem;
+  text-decoration: none;
+  color: #a6a6a6;
+  display: inline-block;
+  background-color: #f5f5f5;
+  border-radius: .3rem;
+  padding: .2rem .5rem .1rem;
 }
