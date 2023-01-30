@@ -65,8 +65,8 @@ def one_week_from_today(): # this is used to set deadline automatically one week
 class Task(models.Model):
     class Status(models.TextChoices):
         AI = "AI", "Входящие"
-        BW = "BW", "В работе"
-        CC = "CC", "На проверке"
+        BW = "BW", "Выполняется"
+        CC = "CC", "Проверка"
         DR = "DR", "Исправляется"
         ED = "ED", "Готово"
     

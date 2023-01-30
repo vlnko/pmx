@@ -171,7 +171,7 @@ def getTasks(request): # gets all tasks for current user
 def getMyProgress(request): # returns progress info for widget
     count_my_tasks_all = len(Task.objects.all().filter(executor=request.user))
     count_my_tasks_done = len(Task.objects.all().filter(
-        executor=request.user).filter(status='DN'))
+        executor=request.user).filter(status='ED'))
         
     if count_my_tasks_all > 0:
         my_progress = str(

@@ -7,9 +7,35 @@
 <h1>Все задачи <a href="{% url 'task-create' 0 %}" style="text-decoration: none;">+</a></h1>
 
 {% if tasks %}
-    {% for task in tasks %}
-        {% include "projects/comp/task-card.html" %}
-    {% endfor %}
+    
+        <table>
+            <thead>
+                <th>ID</th>
+                <th>Наименование</th>
+                <th>Проект</th>
+                <th>Дэдлайн</th>
+                <th>Статус</th>
+                <th>Исполнитель</th>
+                <th>Действия</th>
+            </thead>
+            <tbody>
+                {% for task in tasks %}
+                <tr>
+                    <td>{{ task.id }}</td>
+                    <td><a href="{%url 'task-detail' task.id %}">{{ task.title }}</a></td>
+                    <td>{{ task.project }}</td>
+                    <td>{{ task.date_end }}</td>
+                    <td><p class="status-{{ task.status }}">{{ task.get_status_display }}</p></td>
+                    <td>@{{ task.executor.username }}</td>
+                    <td>
+                        <a href="{%url 'task-update' task.id %}">Edit</a>
+                        <a href="{%url 'task-delete' task.id %}">Delete</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+   
 {% else %}
     <h3>У тебя пока нет задач.</h3>
 {% endif %}
