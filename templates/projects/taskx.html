@@ -2,8 +2,10 @@
 <h2>Мои задачи</h2>
 {% if tasks %}
 {% for task in tasks %}
-    {% include "projects/comp/task-card.html" %}
+    {% include "projects/comp/task-card2.html" %}
 {% endfor %}
 {% else %}
 <h3>У тебя пока нет задач.</h3>
 {% endif %}
+
+<script src="{% static 'status-change.js' %}"></script>
