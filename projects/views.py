@@ -21,7 +21,7 @@ def ProjectHomeView(request):
         project_team=request.user).order_by('deadline')
     count_my_tasks_all = len(Task.objects.all().filter(executor=request.user))
     count_my_tasks_done = len(Task.objects.all().filter(
-        executor=request.user).filter(status='DN'))
+        executor=request.user).filter(status='ED'))
     if count_my_tasks_all > 0:
         my_progress = str(
             int(count_my_tasks_done / count_my_tasks_all * 100)) + '%'
