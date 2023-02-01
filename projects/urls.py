@@ -13,7 +13,6 @@ urlpatterns = [
     path('t/my/', MyTasksView, name='task-my'),
     path('t/get/', getTasks, name='get-tasks'),
     path("t/create/<int:pr_id>", TaskCreateView.as_view(), name="task-create"),
-    path('t/detail/<int:pk>/', TaskDetailView.as_view(), name='task-detail'),
     path('t/update/<int:pk>/', TaskUpdateView.as_view(), name='task-update'),
     path('t/delete/<int:pk>/', TaskDeleteView.as_view(), name='task-delete'),
     # Task status urls

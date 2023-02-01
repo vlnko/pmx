@@ -14,20 +14,10 @@ from django.shortcuts import render
 # Project views
 
 @login_required(login_url='login')
-def ProjectHomeView(request):
+def DashboardView(request):
     my_tasks = Task.objects.all().filter(
         executor=request.user).order_by('status', 'date_end')
-    my_projects = Project.objects.all().filter(
-        project_team=request.user).order_by('deadline')
-    count_my_tasks_all = len(Task.objects.all().filter(executor=request.user))
-    count_my_tasks_done = len(Task.objects.all().filter(
-        executor=request.user).filter(status='ED'))
-    if count_my_tasks_all > 0:
-        my_progress = str(
-            int(count_my_tasks_done / count_my_tasks_all * 100)) + '%'
-    else:
-        my_progress = 0
-    return render(request, 'projects/home.html', {'title': 'My homepage', 'tasks': my_tasks, 'projects': my_projects, 'my_progress': my_progress})
+    return render(request, 'projects/home.html', {'title': 'PMX: Дашборд', 'tasks': my_tasks})
 
 
 class ProjectDetailView(LoginRequiredMixin, DetailView):
@@ -85,11 +75,6 @@ class TaskCreateView(LoginRequiredMixin, CreateView):
             return render(request, self.template_name, {'form': form})
 
 
-class TaskDetailView(LoginRequiredMixin, DetailView):
-    model = Task
-    template_name = "projects/task_detail.html"
-
-
 class TaskUpdateView(LoginRequiredMixin, UpdateView):
     model = Task
     form_class = TaskUpdateForm
@@ -97,7 +82,7 @@ class TaskUpdateView(LoginRequiredMixin, UpdateView):
 
     def get_success_url(self):
         pk = self.kwargs["pk"]
-        return reverse_lazy("task-detail", kwargs={"pk": pk})
+        return reverse_lazy("project-home")
 
     def form_valid(self, form):
         return super(TaskUpdateView, self).form_valid(form)

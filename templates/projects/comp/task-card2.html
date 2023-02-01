@@ -3,51 +3,40 @@
     <div class="space-between">
         <!-- Left block -->
         <div>
-
-            <h3 style="margin: 0;" class="project-title">
-                <a href="{%url 'task-detail' task.id %}">
+            <h3 style="margin: 0" class="project-title">
+                <a href="{%url 'task-update' task.id %}">
                     {{ task.title }} @{{ task.executor.username }}
                 </a>
             </h3>
-
-            <p class="project-date"><b>{{ task.project }}/</b> до {{ task.date_end }}</p>
-
-            
-
+            <small><b>{{ task.project }}/</b> до {{ task.date_end }}</small>
         </div>
 
         <!-- Right block -->
-        <div style="display: flex; align-items: center;">
 
-            <div class="status-badge__wrapper">
-                <span class="status-badge__text status-{{ task.status }}">{{ task.get_status_display }}</span>
-                <div class="status-badge__buttons hidden">
-                    <a href="" hx-get="{% url 'task-make-inbox' task.id %}" hx-target="#taskx">Входящие</a>
-                    <a href="" hx-get="{% url 'task-make-working' task.id %}" hx-target="#taskx">Выполняется</a>
-                    <a href="" hx-get="{% url 'task-make-checking' task.id %}" hx-target="#taskx">Проверка</a>
-                    <a href="" hx-get="{% url 'task-make-reworking' task.id %}" hx-target="#taskx">Исправляется</a>
-                    <a href="" hx-get="{% url 'task-make-done' task.id %}" hx-target="#taskx">Готово</a>
-                </div>
-            </div>
-            
-            
-            
-            <!-- Edit icon -->
-            <a href="{%url 'task-update' task.id %}" style="height: 20px; margin-left: .4rem;"><img
-                    src="{% static 'img/ic20-edit.svg' %}"></a>
-            
-            <!-- Check as done icon -->
-            {% if not task.status == "ED" %}
-                <a href="" style="height: 20px; margin-left: .4rem;" 
-                    hx-get="{% url 'task-make-done' task.id %}"
-                    hx-target="#taskx"><img src="{% static 'img/ic20-check.png' %}"></a>
-            {% else %}
-                <a href="" style="height: 20px; margin-left: .4rem;" 
+        <div class="status-badge__wrapper">
+            <span class="status-badge__text status-{{ task.status }}">
+                {{ task.get_status_display }}
+            </span>
+            <div class="status-badge__buttons">
+                <a
+                    href=""
                     hx-get="{% url 'task-make-inbox' task.id %}"
-                    hx-target="#taskx"><img src="{% static 'img/ic20-check-p.png' %}"></a>
-            {% endif %}
-
+                    hx-target="#taskx"
+                    >Входящие</a
+                >
+                <a
+                    href=""
+                    hx-get="{% url 'task-make-working' task.id %}"
+                    hx-target="#taskx"
+                    >Выполняется</a
+                >
+                <a
+                    href=""
+                    hx-get="{% url 'task-make-done' task.id %}"
+                    hx-target="#taskx"
+                    >Готово</a
+                >
+            </div>
         </div>
     </div>
-    
 </div>

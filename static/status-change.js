@@ -12,6 +12,7 @@ document.onclick = e => {
 
 function toggleButtons(e) {
     e.target.parentElement.classList.toggle("selected");
+    e.target.classList.add("hidden");
 }
 
 

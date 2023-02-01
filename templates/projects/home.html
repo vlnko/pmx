@@ -1,61 +1,48 @@
 {% extends 'base.html' %}
+
 {% load static %}
 
-{% block title %}Home page{% endblock title %}
+{% block title %}Home page{% endblock %}
+
+{% block head %}
+    <link rel="stylesheet" href="{% static 'main.css' %}" />
+{% endblock %}
 
 {% block content %}
-
-<h1>{{ user.first_name }} {{ user.last_name }} (@{{ user.username }})</h1>
-<div class="infobox">
-    <div class="infocard green">
-        <span>Мой прогресс</span>
-        <h1 hx-trigger="htmx:afterSwap from:#taskx delay:1s" hx-get="{% url 'getmyprogress' %}">{{ my_progress }}</h1>
-    </div>
-    <div class="infocard purple">
-        <span>Моих задач</span>
-        <h1>{{ tasks|length }}</h1>
-    </div>
-    <div class="infocard yellow">
-        <span>Проектов со мной</span>
-        <h1>{{ projects|length }}</h1>
-    </div>
-</div>
-
-
-<br><br>
-<a href="{% url 'task-create' 0 %}" class="btn-primary">Новая задача</a>
-<a href="{% url 'project-create' %}" class="btn-primary">Новый проект</a>
-<br><br>
-<div class="home-cols">
-    <div id="taskx">
-        <h2>Мои задачи</h2>
-        {% if tasks %}
-        {% for task in tasks %}
-            {% include "projects/comp/task-card2.html" %}
-        {% endfor %}
-        {% else %}
-            <h3>У тебя пока нет задач.</h3>
-        {% endif %}
-    </div>
-
+<div class="cols">
     <div>
-        <h2>Мои проекты</h2>
-        {% if projects %}
-        {% for project in projects %}
-            {% include "projects/comp/proj-card.html" %}
-        {% endfor %}
-        {% else %}
-            <h3>Ты пока не участвуешь ни в одном проекте.</h3>
-        {% endif %}
+        <h2>Привет, @{{ user.username }}!</h2>
+        <h1>У тебя всего {{ tasks|length }} задач</h1>
+    
+        <ul class="pagetabs">
+            <li>Сегодня</li>
+            <li>На этой неделе</li>
+            <li>Позднее</li>
+        </ul>
+
+        <div id="taskx">
+            {% if tasks %}
+                {% for task in tasks %}
+                    {% include "projects/comp/task-card2.html" %}
+                {% endfor %}
+            {% else %}
+                <h3>У тебя пока нет задач.</h3>
+            {% endif %}
+        </div>
     </div>
-
+    
+    <div>
+        <a href="{% url 'task-create' 0 %}" class="btn-prim">
+            <span>Добавить задачу</span>
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z"/>
+            </svg>
+        </a>
+    </div>
 </div>
-
-
 
 
 {% endblock content %}
-
 
 {% block script %}
     <script src="{% static 'status-change.js' %}"></script>
