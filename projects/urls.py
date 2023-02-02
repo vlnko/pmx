@@ -21,6 +21,4 @@ urlpatterns = [
     path('t/makechecking/<int:pk>/', TaskMakeCheckingView, name='task-make-checking'),
     path('t/makereworking/<int:pk>/', TaskMakeReworkingView, name='task-make-reworking'),
     path('t/makedone/<int:pk>/', TaskMakeDoneView, name='task-make-done'),
-    # Utility urls
-    path('getmyprogress/', getMyProgress, name='getmyprogress'), # this is for progress widget
 ]

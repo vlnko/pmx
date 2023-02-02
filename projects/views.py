@@ -150,18 +150,3 @@ def getTasks(request): # gets all tasks for current user
         executor=request.user).order_by('status', 'date_end')
     return render(request, 'projects/taskx.html', {'tasks': tasks})
 
-
-# Utility views
-
-def getMyProgress(request): # returns progress info for widget
-    count_my_tasks_all = len(Task.objects.all().filter(executor=request.user))
-    count_my_tasks_done = len(Task.objects.all().filter(
-        executor=request.user).filter(status='ED'))
-        
-    if count_my_tasks_all > 0:
-        my_progress = str(
-            int(count_my_tasks_done / count_my_tasks_all * 100)) + '%'
-    else:
-        my_progress = 0
-
-    return render(request, 'projects/progressx.html', {'progress': my_progress})
